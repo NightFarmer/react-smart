@@ -15,7 +15,10 @@ import Util from './libs/react-native-router-flux/src/Util';
 import TopBar from './src/TopBar'
 import Toast from './src/Toast'
 import Spin from './src/Spin'
+import SpinProgress from './src/SpinProgress'
+import ProgressCircle from './src/ProgressCircle'
 import Button from './src/Button'
+import Http from './src/Http'
 
 export {
     Actions,
@@ -34,5 +37,8 @@ export {
     TopBar,
     Toast,
     Spin,
-    Button
+    SpinProgress,
+    ProgressCircle,
+    Button,
+    Http,
 };

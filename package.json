@@ -9,6 +9,7 @@
   "author": "NightFarmer",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.16.2",
     "clamp": "^1.0.1",
     "fbjs": "^0.8.16",
     "prop-types": "^15.6.0",
