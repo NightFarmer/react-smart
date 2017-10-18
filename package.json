@@ -1,0 +1,20 @@
+{
+  "name": "react-smart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "NightFarmer",
+  "license": "ISC",
+  "dependencies": {
+    "clamp": "^1.0.1",
+    "fbjs": "^0.8.16",
+    "prop-types": "^15.6.0",
+    "react-addons-pure-render-mixin": "^15.6.2",
+    "react-native-tabs": "^1.0.9",
+    "react-static-container": "^1.0.1",
+    "uuid": "^3.1.0"
+  }
+}
