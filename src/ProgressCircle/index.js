@@ -25,16 +25,29 @@ class ProgressCircle extends Component {
             borderWidth: this.props.borderWidth ? this.props.borderWidth : 3,
             backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : '#FFF',
             borderColor: this.props.color ? this.props.color : "#337ab7",
+            size: this.props.size ? this.props.size : 100,
             // progress: 0.3
         };
         this.setValue(this.props.progress ? this.props.progress : 0)
     }
 
     render() {
-        return (<View style={[styles.container, {backgroundColor: this.state.backgroundColor}]}>
-            <View style={[styles.layer, {backgroundColor: this.state.backgroundColor}]}>
+        return (<View style={[styles.container, {
+            backgroundColor: this.state.backgroundColor,
+            width: this.state.size,
+            height: this.state.size,
+        }, this.props.style
+        ]}>
+            <View style={[styles.layer, {
+                backgroundColor: this.state.backgroundColor,
+                width: this.state.size / 2,
+                height: this.state.size
+            }]}>
                 <Animated.View style={[styles.arcLeft, {
-                    backgroundColor: this.state.backgroundColor, transform: [{
+                    backgroundColor: this.state.backgroundColor,
+                    width: this.state.size,
+                    height: this.state.size,
+                    transform: [{
                         rotate: this.rotateLeft.interpolate({
                             inputRange: [0, 1],
                             outputRange: ['0deg', '360deg'],
@@ -43,14 +56,27 @@ class ProgressCircle extends Component {
                 }]}>
                     <View style={[styles.circleProgress, {
                         borderWidth: this.state.borderWidth,
-                        borderColor: this.state.borderColor
+                        borderColor: this.state.borderColor,
+                        width: this.state.size,
+                        height: this.state.size
                     }]}/>
-                    <View style={[styles.maskRight, {backgroundColor: this.state.backgroundColor}]}/>
+                    <View style={[styles.maskRight, {
+                        backgroundColor: this.state.backgroundColor,
+                        width: this.state.size / 2,
+                        height: this.state.size
+                    }]}/>
                 </Animated.View>
             </View>
-            <View style={[styles.layer, {backgroundColor: this.state.backgroundColor}]}>
+            <View style={[styles.layer, {
+                backgroundColor: this.state.backgroundColor,
+                width: this.state.size / 2,
+                height: this.state.size
+            }]}>
                 <Animated.View style={[styles.arcRight, {
-                    backgroundColor: this.state.backgroundColor, transform: [{
+                    backgroundColor: this.state.backgroundColor,
+                    width: this.state.size,
+                    height: this.state.size,
+                    transform: [{
                         rotate: this.rotateRight.interpolate({
                             inputRange: [0, 1],
                             outputRange: ['-180deg', '180deg'],
@@ -59,9 +85,15 @@ class ProgressCircle extends Component {
                 }]}>
                     <View style={[styles.circleProgress, {
                         borderWidth: this.state.borderWidth,
-                        borderColor: this.state.borderColor
+                        borderColor: this.state.borderColor,
+                        width: this.state.size,
+                        height: this.state.size
                     }]}/>
-                    <View style={[styles.maskLeft, {backgroundColor: this.state.backgroundColor}]}/>
+                    <View style={[styles.maskLeft, {
+                        backgroundColor: this.state.backgroundColor,
+                        width: this.state.size / 2,
+                        height: this.state.size
+                    }]}/>
                 </Animated.View>
             </View>
         </View>)
@@ -82,6 +114,7 @@ class ProgressCircle extends Component {
             borderWidth: props.borderWidth ? props.borderWidth : 3,
             backgroundColor: props.backgroundColor ? props.backgroundColor : '#FFF',
             borderColor: props.color ? props.color : "#337ab7",
+            size: this.props.size ? this.props.size : 100,
         })
         this.animTo(props.progress ? props.progress : 0)
     }
@@ -123,6 +156,8 @@ const styles = StyleSheet.create({
         width: 160,
         height: 160,
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     layer: {
         height: 160,
@@ -150,7 +185,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         transform: [
             {rotate: '-10deg'}
-        ]
+        ],
     },
     maskLeft: {
         width: 80,

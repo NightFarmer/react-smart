@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#000A",
         borderRadius: 8,
         color: "#FFF",
-        fontSize: width * 0.03,
+        fontSize: width * 0.035,
         alignSelf: "flex-end",
         padding: 10,
         maxWidth: width / 2

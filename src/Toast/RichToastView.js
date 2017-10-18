@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     },
     defaultText: {
         color: "#FFF",
-        fontSize: width * 0.03,
+        fontSize: width * 0.035,
         textAlign: 'center',
         marginTop: 9
     },

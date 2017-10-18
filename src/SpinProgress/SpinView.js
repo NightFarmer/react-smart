@@ -20,21 +20,23 @@ const {width, height} = Dimensions.get("window");
 
 class SpinView extends Component {
 
-    static EventType = "smart-span-view";
+    static EventType = "smart-span-progress-view";
 
     opacityAnim = new Animated.Value(0);
 
     constructor(props) {
         super(props);
         this.state = {
-            message: this.props.info.message ? this.props.info.message : ''
+            message: this.props.info.message ? this.props.info.message : '',
+            progress: 0
         }
     }
 
     render() {
         return (<Animated.View style={[styles.container, this.buildStyle()]}>
             <Animated.View style={[styles.spinCard, this.buildStyle()]}>
-                <ProgressCircle size="large" color="#337ab7" style={styles.indicator}/>
+                <ProgressCircle size={width * 0.12} color="#337ab7" style={styles.indicator}
+                                progress={this.state.progress}/>
                 <Text style={styles.label}>{this.state.message}</Text>
             </Animated.View>
         </Animated.View>)
@@ -49,7 +51,8 @@ class SpinView extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            message: nextProps.info.message ? nextProps.info.message : ''
+            message: nextProps.info.message ? nextProps.info.message : '',
+            progress: 0
         })
         // clearTimeout(this.dismissHandler)
         // this.timingDismiss()
@@ -60,6 +63,10 @@ class SpinView extends Component {
         DeviceEventEmitter.addListener(SpinView.EventType, event => {
             if (event.event === 'dismiss') {
                 this.dismiss()
+            } else if (event.event === 'update') {
+                this.setState({
+                    progress: event.value
+                })
             }
         });
         Animated.timing(
@@ -122,9 +129,11 @@ const styles = StyleSheet.create({
     },
     indicator: {
         height: width * 0.15,
+        alignSelf: 'center',
+
     },
     label: {
-        fontSize: width * 0.03,
+        fontSize: width * 0.035,
         color: "#333333",
         paddingTop: 5,
         textAlign: "center"

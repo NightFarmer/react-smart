@@ -25,6 +25,13 @@ class Spin {
             event: 'dismiss'
         })
     }
+
+    static update(value) {
+        DeviceEventEmitter.emit(SpinView.EventType, {
+            event: 'update',
+            value
+        })
+    }
 }
 
 export default Spin
