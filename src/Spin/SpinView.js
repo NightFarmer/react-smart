@@ -111,9 +111,9 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     spinCard: {
-        minWidth: width * 0.25,
+        minWidth: width * 0.27,
         maxWidth: width * 0.3,
-        minHeight: width * 0.25,
+        minHeight: width * 0.27,
         backgroundColor: "#FFF",
         borderRadius: width * 0.025,
         padding: 10

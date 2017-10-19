@@ -32,7 +32,7 @@ class SpinView extends Component {
 
     render() {
         return (<Animated.View style={[styles.container, this.buildStyle()]}>
-            <Animated.View style={[styles.dialogCard, this.buildStyle()]}>
+            <Animated.View style={[styles.dialogCard, {/*this.buildStyle()*/}]}>
                 <View style={styles.infoArea}>
                     <Text style={styles.title}>{this.props.info.title}</Text>
                     <Text style={styles.label}>{this.props.info.content}</Text>

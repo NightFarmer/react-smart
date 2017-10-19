@@ -54,17 +54,36 @@ class ProgressCircle extends Component {
                         })
                     }]
                 }]}>
-                    <View style={[styles.circleProgress, {
-                        borderWidth: this.state.borderWidth,
-                        borderColor: this.state.borderColor,
-                        width: this.state.size,
-                        height: this.state.size
-                    }]}/>
-                    <View style={[styles.maskRight, {
-                        backgroundColor: this.state.backgroundColor,
+                    <View style={{
                         width: this.state.size / 2,
-                        height: this.state.size
-                    }]}/>
+                        height: this.state.size,
+                        position: 'absolute',
+                        backgroundColor: this.state.backgroundColor,
+                        right: 0,
+                    }}>
+                        <View style={[styles.bgd, {
+                            borderWidth: this.state.borderWidth,
+                            width: this.state.size,
+                            height: this.state.size,
+                            borderRadius: this.state.size / 2,
+                            position: 'absolute',
+                            left: -this.state.size / 2
+                        }]}/>
+                    </View>
+                    <View style={{
+                        width: this.state.size / 2,
+                        height: this.state.size,
+                        position: 'absolute',
+                        backgroundColor: this.state.backgroundColor,
+                    }}>
+                        <View style={[styles.circleProgress, {
+                            borderWidth: this.state.borderWidth,
+                            borderColor: this.state.borderColor,
+                            width: this.state.size,
+                            height: this.state.size,
+                            borderRadius: this.state.size / 2
+                        }]}/>
+                    </View>
                 </Animated.View>
             </View>
             <View style={[styles.layer, {
@@ -83,17 +102,34 @@ class ProgressCircle extends Component {
                         })
                     }]
                 }]}>
-                    <View style={[styles.circleProgress, {
-                        borderWidth: this.state.borderWidth,
-                        borderColor: this.state.borderColor,
-                        width: this.state.size,
-                        height: this.state.size
-                    }]}/>
-                    <View style={[styles.maskLeft, {
-                        backgroundColor: this.state.backgroundColor,
+                    <View style={{
                         width: this.state.size / 2,
-                        height: this.state.size
-                    }]}/>
+                        height: this.state.size,
+                        position: 'absolute',
+                    }}>
+                        <View style={[styles.bgd, {
+                            borderWidth: this.state.borderWidth,
+                            width: this.state.size,
+                            height: this.state.size,
+                            borderRadius: this.state.size / 2
+                        }]}/>
+                    </View>
+                    <View style={{
+                        width: this.state.size / 2,
+                        height: this.state.size,
+                        position: 'absolute',
+                        right: 0,
+                        backgroundColor: this.state.backgroundColor
+                    }}>
+                        <View style={[styles.circleProgress, {
+                            borderWidth: this.state.borderWidth,
+                            borderColor: this.state.borderColor,
+                            width: this.state.size,
+                            height: this.state.size,
+                            borderRadius: this.state.size / 2,
+                            left: -this.state.size / 2
+                        }]}/>
+                    </View>
                 </Animated.View>
             </View>
         </View>)
@@ -158,6 +194,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    bgd: {
+        width: 10,
+        height: 10,
+        borderWidth: 10,
+        borderRadius: 5,
+        borderColor: "#b9b9b9",
+        position: 'absolute',
+        left: 0,
+        top: 0
     },
     layer: {
         height: 160,

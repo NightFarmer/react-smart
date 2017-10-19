@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity,StyleSheet} from 'react-native';
 
 export default class Button extends TouchableOpacity {
 
@@ -82,7 +82,7 @@ export default class Button extends TouchableOpacity {
         }
         borderWidth = 1;
 
-        style = [{
+        let style2 = [{
             backgroundColor,
             borderColor,
             borderWidth,
@@ -93,15 +93,15 @@ export default class Button extends TouchableOpacity {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
-        }].concat(style);
-        console.log(textColor)
+            margin: StyleSheet.hairlineWidth
+        }]//.concat(style);
         if (!React.isValidElement(title) && (title || title === '' || title === 0)) {
             titleStyle = [{
                 color: textColor,
                 fontSize: textFontSize,
                 overflow: 'hidden',
             }].concat(titleStyle);
-            title = <Text style={titleStyle} numberOfLines={1}>{title}</Text>;
+            title = <View style={style2}><Text style={titleStyle} numberOfLines={1}>{title}</Text></View>;
         }
         if (title) children = title;
 

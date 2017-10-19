@@ -95,7 +95,8 @@ const styles = StyleSheet.create({
         height: 21,
     },
     iconRight: {
-        marginLeft: 8
+        marginLeft: 8,
+        color:"#333"
     }
 });
 
