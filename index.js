@@ -19,6 +19,7 @@ import SpinProgress from './src/SpinProgress'
 import ProgressCircle from './src/ProgressCircle'
 import Button from './src/Button'
 import Http from './src/Http'
+import Dialog from './src/Dialog'
 
 export {
     Actions,
@@ -41,4 +42,5 @@ export {
     ProgressCircle,
     Button,
     Http,
+    Dialog
 };

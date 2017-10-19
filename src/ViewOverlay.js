@@ -9,6 +9,7 @@ class ViewOverlay extends Component {
             key: 0,
             toast: null,
             spin: null,
+            layerList: [],
             i: 0
         }
     }
@@ -16,6 +17,7 @@ class ViewOverlay extends Component {
     render() {
         return (<View style={styles.viewOverlay}>
             <View></View>
+            {this.state.layerList.map((it) => it.view)}
             {this.state.toast}
             {this.state.spin}
         </View>)
@@ -29,10 +31,36 @@ class ViewOverlay extends Component {
         DeviceEventEmitter.emit("setState", {spin: view});
     }
 
+    static addLayer(view, id) {
+        DeviceEventEmitter.emit("addLayer", {view, id});
+        return view;
+    }
+
+    static removeLayer(id) {
+        DeviceEventEmitter.emit("removeLayer", {id});
+    }
+
     componentWillMount() {
         DeviceEventEmitter.addListener("setState", state => {
             this.setState(state)
         });
+
+        DeviceEventEmitter.addListener("addLayer", event => {
+            this.state.layerList.push(event);
+            this.setState({layerList: this.state.layerList})
+        });
+
+        DeviceEventEmitter.addListener("removeLayer", event => {
+            let layerList = this.state.layerList;
+            for (let i = 0; i < layerList.length; i++) {
+                if (layerList[i].id === event.id) {
+                    layerList.splice(i, 1);
+                    break;
+                }
+            }
+            this.setState({layerList: layerList})
+        });
+
 
         // DeviceEventEmitter.addListener("addOverlay", e => this.add(e));
         // DeviceEventEmitter.addListener("removeOverlay", e => this.remove(e));
@@ -43,6 +71,8 @@ class ViewOverlay extends Component {
 
     componentWillUnmount() {
         DeviceEventEmitter.removeAllListeners("setState");
+        DeviceEventEmitter.removeAllListeners("addLayer");
+        DeviceEventEmitter.removeAllListeners("removeLayer");
 
         // DeviceEventEmitter.removeAllListeners("addOverlay");
         // DeviceEventEmitter.removeAllListeners("removeOverlay");
