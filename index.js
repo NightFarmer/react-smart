@@ -20,6 +20,7 @@ import ProgressCircle from './src/ProgressCircle'
 import Button from './src/Button'
 import Http from './src/Http'
 import Dialog from './src/Dialog'
+import CheckBox from './src/CheckBox'
 
 export {
     Actions,
@@ -42,5 +43,6 @@ export {
     ProgressCircle,
     Button,
     Http,
-    Dialog
+    Dialog,
+    CheckBox
 };
