@@ -114,7 +114,7 @@ class RichToastView extends Component {
 
 const styles = StyleSheet.create({
     toast: {
-        backgroundColor: "#000A",
+        backgroundColor: "#000C",
         borderRadius: 8,
         padding: 10,
 

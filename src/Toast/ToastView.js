@@ -108,7 +108,7 @@ class ToastView extends Component {
 
 const styles = StyleSheet.create({
     defaultText: {
-        backgroundColor: "#000A",
+        backgroundColor: "#000B",
         borderRadius: 8,
         color: "#FFF",
         fontSize: width * 0.035,

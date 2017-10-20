@@ -10,8 +10,8 @@ class Http extends Axios {
             }
         }
         // 需要上传的文件
-        const file = { uri: '', type: 'multipart/form-data', name: 'fileName.xx' };   // 这里的key(uri和type和name)不能改变,
-        formData.append('file', file);   // 这里的files就是后台需要的key
+        // const file = { uri: '', type: 'multipart/form-data', name: 'fileName.xx' };   // 这里的key(uri和type和name)不能改变,
+        // formData.append('file', file);   // 这里的files就是后台需要的key
 
         let config = {
             headers: {

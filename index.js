@@ -21,6 +21,8 @@ import Button from './src/Button'
 import Http from './src/Http'
 import Dialog from './src/Dialog'
 import CheckBox from './src/CheckBox'
+import ActionSheet from './src/ActionSheet'
+
 
 export {
     Actions,
@@ -44,5 +46,6 @@ export {
     Button,
     Http,
     Dialog,
-    CheckBox
+    CheckBox,
+    ActionSheet
 };

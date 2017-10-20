@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
         // padding: 10
     },
     infoArea: {
-        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomWidth: StyleSheet.hairlineWidth * 2,
         borderColor: "#cacace",
         minHeight: 100,
     },
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
         height: 45
     },
     lineV: {
-        width: StyleSheet.hairlineWidth,
+        width: StyleSheet.hairlineWidth * 2,
         backgroundColor: "#cacace",
     },
     btn: {
