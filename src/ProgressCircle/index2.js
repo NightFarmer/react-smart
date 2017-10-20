@@ -22,13 +22,16 @@ class ProgressCircle extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            borderWidth: this.props.borderWidth ? this.props.borderWidth : 3,
+            borderWidth: this.props.borderWidth ? this.props.borderWidth : 10,
             backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : '#FFF',
-            borderColor: this.props.borderColor ? this.props.borderColor : "#337ab7",
-            size: this.props.size ? this.props.size : 100,
+            borderColor: this.props.borderColor ? this.props.borderColor : "#FFBB02",
+            size: this.props.size ? this.props.size : 300,
             // progress: 0.3
         };
         this.setValue(this.props.progress ? this.props.progress : 0)
+        // this.setValue(0.5)
+        // this.setValue(1)
+        // this.setValue(0.8)
     }
 
     render() {
@@ -36,7 +39,11 @@ class ProgressCircle extends Component {
             backgroundColor: this.state.backgroundColor,
             width: this.state.size,
             height: this.state.size,
-        }, this.props.style
+        }, this.props.style, {
+            transform: [
+                // {rotate:"180deg"}
+            ]
+        }
         ]}>
             <View style={[styles.layer, {
                 backgroundColor: this.state.backgroundColor,
@@ -49,8 +56,10 @@ class ProgressCircle extends Component {
                     height: this.state.size,
                     transform: [{
                         rotate: this.rotateLeft.interpolate({
-                            inputRange: [0, 1],
-                            outputRange: ['0deg', '360deg'],
+                            inputRange: [0, 0.5, 1],
+                            outputRange: ['-135deg', '0deg', '0deg'],
+                            //0   0,5    1
+                            //45  180
                         })
                     }]
                 }]}>
@@ -62,12 +71,15 @@ class ProgressCircle extends Component {
                         right: 0,
                     }}>
                         <View style={[styles.bgd, {
-                            borderWidth: this.state.borderWidth,
-                            width: this.state.size,
-                            height: this.state.size,
+                            borderWidth: 2,
+                            width: this.state.size - this.state.borderWidth + 2,
+                            height: this.state.size - this.state.borderWidth + 2,
                             borderRadius: this.state.size / 2,
                             position: 'absolute',
-                            left: -this.state.size / 2
+                            left: -this.state.size / 2 + this.state.borderWidth / 2 - 1,
+                            right: this.state.borderWidth / 2 - 1,
+                            top: this.state.borderWidth / 2 - 1,
+                            bottom: this.state.borderWidth / 2 - 1
                         }]}/>
                     </View>
                     <View style={{
@@ -85,6 +97,25 @@ class ProgressCircle extends Component {
                         }]}/>
                     </View>
                 </Animated.View>
+                <View
+                    style={{
+                        width: this.state.size,
+                        height: this.state.size,
+                        position: 'absolute',
+                        transform: [{
+                            rotate: "45deg"
+                        }]
+                    }}
+                >
+                    <View style={{
+                        width: this.state.size / 2,
+                        height: this.state.size,
+                        position: 'absolute',
+                        backgroundColor: this.state.backgroundColor,
+                        // backgroundColor: "#F003",
+                        left: this.state.size / 2
+                    }}/>
+                </View>
             </View>
             <View style={[styles.layer, {
                 backgroundColor: this.state.backgroundColor,
@@ -97,8 +128,8 @@ class ProgressCircle extends Component {
                     height: this.state.size,
                     transform: [{
                         rotate: this.rotateRight.interpolate({
-                            inputRange: [0, 1],
-                            outputRange: ['-180deg', '180deg'],
+                            inputRange: [0, 0.5, 1],
+                            outputRange: ['-180deg', '-180deg', '-45deg'],
                         })
                     }]
                 }]}>
@@ -108,10 +139,14 @@ class ProgressCircle extends Component {
                         position: 'absolute',
                     }}>
                         <View style={[styles.bgd, {
-                            borderWidth: this.state.borderWidth,
-                            width: this.state.size,
-                            height: this.state.size,
-                            borderRadius: this.state.size / 2
+                            borderWidth: 2,
+                            width: this.state.size - this.state.borderWidth + 2,
+                            height: this.state.size - this.state.borderWidth + 2,
+                            borderRadius: (this.state.size ) / 2,
+                            left: this.state.borderWidth / 2 - 1,
+                            top: this.state.borderWidth / 2 - 1,
+                            bottom: this.state.borderWidth / 2 - 1,
+                            right: this.state.size - this.state.borderWidth / 2 + 1
                         }]}/>
                     </View>
                     <View style={{
@@ -131,6 +166,26 @@ class ProgressCircle extends Component {
                         }]}/>
                     </View>
                 </Animated.View>
+                <View
+                    style={{
+                        width: this.state.size,
+                        height: this.state.size,
+                        position: 'absolute',
+                        transform: [{
+                            rotate: "-45deg"
+                        }],
+                        right: 0
+                    }}
+                >
+                    <View style={{
+                        width: this.state.size / 2,
+                        height: this.state.size,
+                        position: 'absolute',
+                        backgroundColor: this.state.backgroundColor,
+                        // backgroundColor: "#F003",
+                        // left: this.state.size / 2
+                    }}/>
+                </View>
             </View>
         </View>)
     }
@@ -141,24 +196,29 @@ class ProgressCircle extends Component {
     }
 
     setValue(to) {
-        this.rotateRight.setValue(Math.max(0, Math.min(0.5, to)))
-        this.rotateLeft.setValue(Math.max(0.5, Math.min(1, to)))
+        // this.rotateRight.setValue(Math.max(0, Math.min(0.5, to)))
+        // this.rotateLeft.setValue(Math.max(0.5, Math.min(1, to)))
+
+        // this.rotateLeft.setValue(Math.max(0, Math.min(0.5, to)))
+
+        this.rotateLeft.setValue(Math.max(0, Math.min(0.5, to)))
+        this.rotateRight.setValue(Math.max(0.5, Math.min(1, to)))
     }
 
     componentWillReceiveProps(props) {
         this.setState({
-            borderWidth: props.borderWidth ? props.borderWidth : 3,
+            borderWidth: props.borderWidth ? props.borderWidth : 10,
             backgroundColor: props.backgroundColor ? props.backgroundColor : '#FFF',
-            borderColor: props.borderColor ? props.borderColor : "#337ab7",
-            size: this.props.size ? this.props.size : 100,
+            borderColor: props.borderColor ? props.borderColor : "#FFBB02",
+            size: this.props.size ? this.props.size : 300,
         })
         this.animTo(props.progress ? props.progress : 0)
     }
 
     animTo(to) {
         console.log('to', to)
-        let rightValue = Math.max(0, Math.min(0.5, to));
-        let leftValue = Math.max(0.5, Math.min(1, to));
+        let leftValue = Math.max(0, Math.min(0.5, to));
+        let rightValue = Math.max(0.5, Math.min(1, to));
         if (rightValue < this.rotateRight.__getValue()) {
             Animated.timing(this.rotateLeft, {
                 toValue: leftValue,
@@ -198,7 +258,7 @@ const styles = StyleSheet.create({
     bgd: {
         width: 10,
         height: 10,
-        borderWidth: 10,
+        // borderWidth: 10,
         borderRadius: 5,
         borderColor: "#b9b9b9",
         position: 'absolute',
@@ -212,7 +272,7 @@ const styles = StyleSheet.create({
     circleProgress: {
         width: 160,
         height: 160,
-        borderWidth: 10,
+        // borderWidth: 10,
         borderRadius: 80,
     },
     arcLeft: {

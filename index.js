@@ -22,6 +22,7 @@ import Http from './src/Http'
 import Dialog from './src/Dialog'
 import CheckBox from './src/CheckBox'
 import ActionSheet from './src/ActionSheet'
+import Popup from './src/Popup'
 
 
 export {
@@ -47,5 +48,6 @@ export {
     Http,
     Dialog,
     CheckBox,
-    ActionSheet
+    ActionSheet,
+    Popup
 };

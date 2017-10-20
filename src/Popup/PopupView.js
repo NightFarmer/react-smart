@@ -18,7 +18,7 @@ import {
 
 const {width, height} = Dimensions.get("window");
 
-class ActionSheetView extends Component {
+class PopupView extends Component {
 
     static EventType = "smart-span-view";
 
@@ -84,7 +84,7 @@ class ActionSheetView extends Component {
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.onBackPress)
-        DeviceEventEmitter.addListener(ActionSheetView.EventType, event => {
+        DeviceEventEmitter.addListener(PopupView.EventType, event => {
             if (event.event === 'dismiss') {
                 this.dismiss()
             }
@@ -109,7 +109,7 @@ class ActionSheetView extends Component {
 
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.onBackPress)
-        DeviceEventEmitter.removeAllListeners(ActionSheetView.EventType);
+        DeviceEventEmitter.removeAllListeners(PopupView.EventType);
     }
 
     cancel = () => {
@@ -262,6 +262,6 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ActionSheetView
+export default PopupView
 
 
