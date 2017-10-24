@@ -42,7 +42,9 @@ class TopBar extends Component {
     }
 
     componentDidMount() {
-
+        StatusBar.setBackgroundColor('#0000');
+        StatusBar.setBarStyle('dark-content', true);
+        StatusBar.setTranslucent(true)
     }
 }
 

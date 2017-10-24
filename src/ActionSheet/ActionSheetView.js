@@ -20,7 +20,7 @@ const {width, height} = Dimensions.get("window");
 
 class ActionSheetView extends Component {
 
-    static EventType = "smart-span-view";
+    static EventType = "smart-action-sheet";
 
     translateY = new Animated.Value(height / 12);
     opacityAnim = new Animated.Value(0);
