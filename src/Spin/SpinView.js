@@ -14,6 +14,8 @@ import {
     DeviceEventEmitter
 } from 'react-native';
 
+import Theme from '../Theme'
+
 const {width, height} = Dimensions.get("window");
 
 class SpinView extends Component {
@@ -32,7 +34,7 @@ class SpinView extends Component {
     render() {
         return (<Animated.View style={[styles.container, this.buildStyle()]}>
             <Animated.View style={[styles.spinCard, this.buildStyle()]}>
-                <ActivityIndicator size="large" color="#337ab7" style={styles.indicator}/>
+                <ActivityIndicator size="large" color={Theme.PrimaryColor} style={styles.indicator}/>
                 <Text style={styles.label}>{this.state.message}</Text>
             </Animated.View>
         </Animated.View>)

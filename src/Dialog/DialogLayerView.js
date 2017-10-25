@@ -17,6 +17,8 @@ import {
 
 const {width, height} = Dimensions.get("window");
 
+import Theme from '../Theme'
+
 class SpinView extends Component {
 
     static EventType = "smart-span-view";

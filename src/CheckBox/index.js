@@ -17,6 +17,8 @@ import {
     Image
 } from 'react-native';
 
+import Theme from '../Theme'
+
 class CheckBox extends Component {
 
 
@@ -61,7 +63,7 @@ class CheckBox extends Component {
             if (disabled) {
                 tintColor = "#cbcbcb"
             } else {
-                tintColor = "#1B88EE"
+                tintColor = Theme.PrimaryColor
             }
         } else {
             imgSrc = require('./icon/normal.png');

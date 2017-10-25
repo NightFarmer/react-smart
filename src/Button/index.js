@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, Text, TouchableOpacity,StyleSheet} from 'react-native';
 
+import Theme from '../Theme'
+
 export default class Button extends TouchableOpacity {
 
     static propTypes = {
@@ -25,8 +27,8 @@ export default class Button extends TouchableOpacity {
         let textColor, textFontSize;
         switch (type) {
             case 'primary':
-                backgroundColor = '#337ab7';
-                borderColor = '#337ab7';
+                backgroundColor = Theme.PrimaryColor;
+                borderColor = Theme.PrimaryColor;
                 textColor = '#fff';
                 break;
             case 'secondary':
@@ -42,12 +44,12 @@ export default class Button extends TouchableOpacity {
             case 'link':
                 backgroundColor = 'rgba(0, 0, 0, 0)';
                 borderColor = 'rgba(0, 0, 0, 0)';
-                textColor = '#337ab7';
+                textColor = Theme.PrimaryColor;
                 break;
             default:
                 backgroundColor = 'rgba(0, 0, 0, 0)';
-                borderColor = '#337ab7';
-                textColor = '#337ab7';
+                borderColor = Theme.PrimaryColor;
+                textColor = Theme.PrimaryColor;
         }
         switch (size) {
             case 'xl':

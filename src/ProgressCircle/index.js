@@ -14,6 +14,8 @@ import {
     DeviceEventEmitter
 } from 'react-native';
 
+import Theme from '../Theme'
+
 class ProgressCircle extends Component {
 
     rotateLeft = new Animated.Value(0.5);
@@ -24,7 +26,7 @@ class ProgressCircle extends Component {
         this.state = {
             borderWidth: this.props.borderWidth ? this.props.borderWidth : 3,
             backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : '#FFF',
-            borderColor: this.props.borderColor ? this.props.borderColor : "#337ab7",
+            borderColor: this.props.borderColor ? this.props.borderColor : Theme.PrimaryColor,
             size: this.props.size ? this.props.size : 100,
             // progress: 0.3
         };
@@ -149,7 +151,7 @@ class ProgressCircle extends Component {
         this.setState({
             borderWidth: props.borderWidth ? props.borderWidth : 3,
             backgroundColor: props.backgroundColor ? props.backgroundColor : '#FFF',
-            borderColor: props.borderColor ? props.borderColor : "#337ab7",
+            borderColor: props.borderColor ? props.borderColor : Theme.PrimaryColor,
             size: this.props.size ? this.props.size : 100,
         })
         this.animTo(props.progress ? props.progress : 0)
@@ -200,7 +202,7 @@ const styles = StyleSheet.create({
         height: 10,
         borderWidth: 10,
         borderRadius: 5,
-        borderColor: "#b9b9b9",
+        borderColor: "#d9d9d9",
         position: 'absolute',
         left: 0,
         top: 0

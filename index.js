@@ -24,6 +24,12 @@ import CheckBox from './src/CheckBox'
 import ActionSheet from './src/ActionSheet'
 import Popup from './src/Popup'
 
+import Theme from './src/Theme'
+
+// const Config = {
+//
+//     Theme: ThemeConfigure
+// };
 
 export {
     Actions,
@@ -49,5 +55,6 @@ export {
     Dialog,
     CheckBox,
     ActionSheet,
-    Popup
+    Popup,
+    Theme
 };

@@ -8,12 +8,18 @@ import {
 
 import {Actions} from '../../libs/react-native-router-flux'
 
+import Theme from '../Theme'
+
 class TopBar extends Component {
 
     render() {
         return (<View style={{alignSelf: "stretch", alignItems: 'stretch'}}>
-            <View style={{height: StatusBar.currentHeight, backgroundColor: "#6fa1e1"}}/>
-            <View style={styles.topBar}>
+            <View style={{height: StatusBar.currentHeight, backgroundColor: Theme.StatusBarColor}}/>
+            <View style={[styles.topBar, {
+                backgroundColor: Theme.TopBarBackgroundColor,
+                borderBottomWidth: Theme.TopBarBorderWidth,
+                borderBottomColor: Theme.TopBarBorderColor
+            }]}>
                 {
                     this.props.hideBack ? null :
                         <TouchableOpacity style={styles.backIcon} onPress={() => {
@@ -23,10 +29,11 @@ class TopBar extends Component {
                                 Actions.pop()
                             }
                         }}>
-                            <Image source={require('./icon/back.png')} style={styles.backIconImg}/>
+                            <Image source={require('./icon/back.png')}
+                                   style={[styles.backIconImg, {tintColor: Theme.TopBarElementColor}]}/>
                         </TouchableOpacity>
                 }
-                <Text style={styles.title}>{this.props.title}</Text>
+                <Text style={[styles.title, {color: Theme.TopBarElementColor}]}>{this.props.title}</Text>
             </View>
         </View>)
     }
