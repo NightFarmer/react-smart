@@ -138,7 +138,7 @@ function rightToLeftMask(/* NavigationSceneRendererProps */ props) {
 
     const opacity = position.interpolate({
         inputRange,
-        outputRange: [0, 0, 0.2],
+        outputRange: [0, 0, 0.3],
     });
 
     return {
