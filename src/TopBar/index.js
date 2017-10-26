@@ -24,7 +24,8 @@ class TopBar extends Component {
             <View style={[styles.topBar, {
                 backgroundColor: Theme.TopBarBackgroundColor,
                 borderBottomWidth: Theme.TopBarBorderWidth,
-                borderBottomColor: Theme.TopBarBorderColor
+                borderBottomColor: Theme.TopBarBorderColor,
+                height:Theme.TopBarHeight,
             }]}>
                 {
                     this.props.hideBack ? null :
