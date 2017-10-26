@@ -24,6 +24,7 @@ import CheckBox from './src/CheckBox'
 import ActionSheet from './src/ActionSheet'
 import Popup from './src/Popup'
 import RowGroup from './src/RowGroup'
+import TouchableView from './src/TouchableView'
 
 import Theme from './src/Theme'
 
@@ -58,5 +59,6 @@ export {
     ActionSheet,
     Popup,
     Theme,
-    RowGroup
+    RowGroup,
+    TouchableView
 };
