@@ -3,18 +3,24 @@ import {
     StyleSheet, AppRegistry, DeviceEventEmitter, View, Animated, Text,
     StatusBar,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Platform,
 } from 'react-native';
 
 import {Actions} from '../../libs/react-native-router-flux'
 
 import Theme from '../Theme'
 
+import DeviceInfo from '../DeviceInfo'
+
 class TopBar extends Component {
 
     render() {
         return (<View style={{alignSelf: "stretch", alignItems: 'stretch'}}>
-            <View style={{height: StatusBar.currentHeight, backgroundColor: Theme.StatusBarColor}}/>
+            {
+                !this.statusBarCouldTranslucent() ? null :
+                    < View style={{height: StatusBar.currentHeight, backgroundColor: Theme.StatusBarColor}}/>
+            }
             <View style={[styles.topBar, {
                 backgroundColor: Theme.TopBarBackgroundColor,
                 borderBottomWidth: Theme.TopBarBorderWidth,
@@ -39,20 +45,33 @@ class TopBar extends Component {
     }
 
     componentWillMount() {
-        // StatusBar.setBackgroundColor('#6fa1e1');
-        StatusBar.setBackgroundColor('#0000');
-        // StatusBar.setBarStyle('light-content', true);
-        StatusBar.setBarStyle('dark-content', true);
-        // StatusBar.setBarStyle('default', true);
-
-        StatusBar.setTranslucent(true)
+        this.setStatusBarStyle()
     }
 
     componentDidMount() {
-        StatusBar.setBackgroundColor('#0000');
-        StatusBar.setBarStyle('dark-content', true);
-        StatusBar.setTranslucent(true)
+        this.setStatusBarStyle()
     }
+
+    setStatusBarStyle(){
+        if (Theme.StatusBarMode === 1) {
+            StatusBar.setBackgroundColor('#0000');
+            StatusBar.setTranslucent(true)
+        } else {
+            StatusBar.setBackgroundColor(Theme.StatusBarColor);
+            StatusBar.setTranslucent(false)
+        }
+        // StatusBar.setBarStyle('dark-content', true);
+        // StatusBar.setBarStyle('light-content', true);
+        // StatusBar.setBarStyle('default', true);
+    }
+
+    statusBarCouldTranslucent() {
+        return Platform.select({
+            ios: true,
+            android: DeviceInfo.Android.SDK_INT ? DeviceInfo.Android.SDK_INT > 19 : true,
+        }) && Theme.StatusBarMode === 1
+    }
+
 }
 
 const styles = StyleSheet.create({

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {StyleSheet, AppRegistry, DeviceEventEmitter, View, Animated, Text} from 'react-native';
-
+import DeviceInfo from './DeviceInfo'
 class ViewOverlay extends Component {
 
     constructor(props) {
@@ -108,6 +108,7 @@ AppRegistry.registerComponent = function (appKey, getAppComponent) {
         return class extends Component {
 
             render() {
+                DeviceInfo.Android.SDK_INT = this.props.Android_SDK_INT;
                 return (
                     <View style={styles.container}>
                         <OriginAppComponent {...this.props} />

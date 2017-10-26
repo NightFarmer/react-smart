@@ -23,6 +23,7 @@ import Dialog from './src/Dialog'
 import CheckBox from './src/CheckBox'
 import ActionSheet from './src/ActionSheet'
 import Popup from './src/Popup'
+import RowGroup from './src/RowGroup'
 
 import Theme from './src/Theme'
 
@@ -56,5 +57,6 @@ export {
     CheckBox,
     ActionSheet,
     Popup,
-    Theme
+    Theme,
+    RowGroup
 };

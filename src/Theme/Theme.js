@@ -3,6 +3,8 @@
 
 class Theme {
 
+    static StatusBarMode = 1;//1沉浸,2染色
+
     // @observable
     static PrimaryColor = "#3ea0f2";
     static PrimaryDarkColor = "#3a96e4";
@@ -19,6 +21,7 @@ class Theme {
     static set TopBarBackgroundColor(value) {
         Theme._TopBarBackgroundColor = value
     }
+
     //TopBar元素颜色=========================================
     static TopBarElementColor = "#FFF";
     //TopBar边框宽度
