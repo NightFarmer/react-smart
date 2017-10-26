@@ -25,7 +25,7 @@ class TopBar extends Component {
                 backgroundColor: Theme.TopBarBackgroundColor,
                 borderBottomWidth: Theme.TopBarBorderWidth,
                 borderBottomColor: Theme.TopBarBorderColor,
-                height:Theme.TopBarHeight,
+                height: Theme.TopBarHeight,
             }]}>
                 {
                     this.props.hideBack ? null :
@@ -40,7 +40,10 @@ class TopBar extends Component {
                                    style={[styles.backIconImg, {tintColor: Theme.TopBarElementColor}]}/>
                         </TouchableOpacity>
                 }
-                <Text style={[styles.title, {color: Theme.TopBarElementColor}]}>{this.props.title}</Text>
+                {
+                    this.props.children ? this.props.children :
+                        <Text style={[styles.title, {color: Theme.TopBarElementColor}]}>{this.props.title}</Text>
+                }
             </View>
         </View>)
     }
@@ -53,7 +56,7 @@ class TopBar extends Component {
         this.setStatusBarStyle()
     }
 
-    setStatusBarStyle(){
+    setStatusBarStyle() {
         if (Theme.StatusBarMode === 1) {
             StatusBar.setBackgroundColor('#0000');
             StatusBar.setTranslucent(true)
