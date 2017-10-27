@@ -18,11 +18,35 @@ class Switch extends Component {
 
     constructor(props) {
         super(props);
+        let stateOn = !!this.props.stateOn;
+        let height = this.props.height === undefined || typeof (this.props.height - 0) !== 'number' ? 25 : this.props.height - 0;
+        let width = this.props.width === undefined || typeof (this.props.width - 0) !== 'number' ? 45 : this.props.width - 0;
+        if (this.props.style) {
+            if (this.props.style.height !== undefined) {
+                height = this.props.style.height
+            }
+            if (this.props.style.width !== undefined) {
+                width = this.props.style.width
+            }
+        }
         this.state = {
-            height: 0,
-            width: 0,
-            stateOn: !!this.props.stateOn
+            height: height,
+            width: width,
+            stateOn: stateOn
         };
+        if (stateOn) {
+            let margin = width - height;
+            this.rightAnim.setValue(0);
+            this.leftAnim.setValue(margin);
+            this.onProgressAnim.setValue(1)
+            this.onProgressAnimDesc.setValue(0)
+        } else {
+            let margin = width - height;
+            this.rightAnim.setValue(margin);
+            this.leftAnim.setValue(0);
+            this.onProgressAnim.setValue(0)
+            this.onProgressAnimDesc.setValue(1)
+        }
     }
 
     render() {
@@ -32,16 +56,14 @@ class Switch extends Component {
             <Animated.View onLayout={this.onLayout}
                            {...this.panResponder.panHandlers}
                            style={[
-                               {
-                                   height: 25,
-                                   width: 45,
-                               },
                                this.props.style,
                                {
                                    backgroundColor: "#ccc",
                                    borderRadius: this.state.height / 2,
                                    flexDirection: 'row',
-                                   alignItems: 'center'
+                                   alignItems: 'center',
+                                   height: this.state.height,
+                                   width: this.state.width,
                                }
                            ]}>
                 <Animated.View style={{
@@ -114,25 +136,25 @@ class Switch extends Component {
 
 
     onLayout = (event) => {
-        let height = event.nativeEvent.layout.height;
-        let width = event.nativeEvent.layout.width;
-        this.setState({
-            height,
-            width,
-        });
-        if (this.state.stateOn) {
-            let margin = width - height;
-            this.rightAnim.setValue(0);
-            this.leftAnim.setValue(margin);
-            this.onProgressAnim.setValue(1)
-            this.onProgressAnimDesc.setValue(0)
-        } else {
-            let margin = width - height;
-            this.rightAnim.setValue(margin);
-            this.leftAnim.setValue(0);
-            this.onProgressAnim.setValue(0)
-            this.onProgressAnimDesc.setValue(1)
-        }
+        // let height = event.nativeEvent.layout.height;
+        // let width = event.nativeEvent.layout.width;
+        // this.setState({
+        //     height,
+        //     width,
+        // });
+        // if (this.state.stateOn) {
+        //     let margin = width - height;
+        //     this.rightAnim.setValue(0);
+        //     this.leftAnim.setValue(margin);
+        //     this.onProgressAnim.setValue(1)
+        //     this.onProgressAnimDesc.setValue(0)
+        // } else {
+        //     let margin = width - height;
+        //     this.rightAnim.setValue(margin);
+        //     this.leftAnim.setValue(0);
+        //     this.onProgressAnim.setValue(0)
+        //     this.onProgressAnimDesc.setValue(1)
+        // }
     };
 
     animOn() {

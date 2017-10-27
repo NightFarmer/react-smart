@@ -36,6 +36,17 @@ class RowGroup extends Component {
     }
 }
 
+RowGroup.Row = class extends Component {
+
+    render() {
+        return (
+            <View style={{padding: 10}}>
+                {this.props.children}
+            </View>
+        )
+    }
+};
+
 const styles = StyleSheet.create({
     lineH: {
         height: StyleSheet.hairlineWidth,
