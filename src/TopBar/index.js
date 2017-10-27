@@ -5,6 +5,7 @@ import {
     Image,
     TouchableOpacity,
     Platform,
+    Dimensions,
 } from 'react-native';
 
 import {Actions} from '../../libs/react-native-router-flux'
@@ -19,7 +20,7 @@ class TopBar extends Component {
         return (<View style={{alignSelf: "stretch", alignItems: 'stretch'}}>
             {
                 !this.statusBarCouldTranslucent() ? null :
-                    < View style={{height: StatusBar.currentHeight, backgroundColor: Theme.StatusBarColor}}/>
+                    < View style={{height: this.getStatusHeight(), backgroundColor: Theme.StatusBarColor}}/>
             }
             <View style={[styles.topBar, {
                 backgroundColor: Theme.TopBarBackgroundColor,
@@ -76,6 +77,20 @@ class TopBar extends Component {
         }) && Theme.StatusBarMode === 1
     }
 
+    getStatusHeight = () => {
+        return Platform.select({
+            android: StatusBar.currentHeight,
+            ios: this.isIphoneX() ? 44 : 20
+        })
+    };
+
+    // 识别iphonex-- 群里大佬提供的奇技淫巧 西安-haise QQ542674656
+    isIphoneX = () => {
+        const {height, width} = Dimensions.get('window');
+        let iphoneX = parseFloat((width / height).toString().substring(0, 5));
+        let iphoneY = parseFloat((height / width).toString().substring(0, 5));
+        return Platform.OS === 'ios' && iphoneX === 2.165 || Platform.OS === 'ios' && iphoneY === 2.165;
+    }
 }
 
 const styles = StyleSheet.create({

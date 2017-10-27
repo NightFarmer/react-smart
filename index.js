@@ -7,7 +7,7 @@ import NavBar from './libs/react-native-router-flux/src/NavBar';
 import Reducer from './libs/react-native-router-flux/src/Reducer';
 import Router from './libs/react-native-router-flux/src/Router';
 import Scene from './libs/react-native-router-flux/src/Scene';
-import Switch from './libs/react-native-router-flux/src/Switch';
+// import Switch from './libs/react-native-router-flux/src/Switch';
 import TabBar from './libs/react-native-router-flux/src/TabBar';
 import getInitialStateFromRoot from './libs/react-native-router-flux/src/State';
 import Util from './libs/react-native-router-flux/src/Util';
@@ -25,6 +25,8 @@ import ActionSheet from './src/ActionSheet'
 import Popup from './src/Popup'
 import RowGroup from './src/RowGroup'
 import TouchableView from './src/TouchableView'
+import Switch from './src/Switch'
+
 
 import Theme from './src/Theme'
 
@@ -42,7 +44,7 @@ export {
     Reducer,
     Router,
     Scene,
-    Switch,
+    // Switch,
     TabBar,
     TabbedView,
     getInitialStateFromRoot,
@@ -60,5 +62,6 @@ export {
     Popup,
     Theme,
     RowGroup,
-    TouchableView
+    TouchableView,
+    Switch
 };
