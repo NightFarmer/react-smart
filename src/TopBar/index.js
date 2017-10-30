@@ -8,7 +8,7 @@ import {
     Dimensions,
 } from 'react-native';
 
-import {Actions} from '../../libs/react-native-router-flux'
+import {Actions} from '../libs/react-native-router-flux'
 
 import Theme from '../Theme'
 
@@ -37,7 +37,7 @@ class TopBar extends Component {
                                 Actions.pop()
                             }
                         }}>
-                            <Image source={require('./icon/back.png')}
+                            <Image source={require('../../img/back.png')}
                                    style={[styles.backIconImg, {tintColor: Theme.TopBarElementColor}]}/>
                         </TouchableOpacity>
                 }

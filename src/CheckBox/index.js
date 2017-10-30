@@ -59,14 +59,14 @@ class CheckBox extends Component {
         let imgSrc;
         let tintColor;
         if (checked) {
-            imgSrc = require('./icon/checked.png');
+            imgSrc = require('../../img/checked.png');
             if (disabled) {
                 tintColor = "#cbcbcb"
             } else {
                 tintColor = Theme.PrimaryColor
             }
         } else {
-            imgSrc = require('./icon/normal.png');
+            imgSrc = require('../../img/normal.png');
             if (disabled) {
                 tintColor = "#cbcbcb"
             } else {

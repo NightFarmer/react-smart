@@ -11,7 +11,8 @@ import {
     Animated,
     BackHandler,
     ActivityIndicator,
-    DeviceEventEmitter
+    DeviceEventEmitter,
+    TouchableOpacity
 } from 'react-native';
 
 import Theme from '../Theme'

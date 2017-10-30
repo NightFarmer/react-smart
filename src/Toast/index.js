@@ -25,19 +25,19 @@ class Toast {
     }
 
     static success(msg) {
-        return Toast.richShow(msg, require('./icon/success.png'))
+        return Toast.richShow(msg, require('../../img/success.png'))
     }
 
     static info(msg) {
-        return Toast.richShow(msg, require('./icon/info.png'))
+        return Toast.richShow(msg, require('../../img/info.png'))
     }
 
     static warn(msg) {
-        return Toast.richShow(msg, require('./icon/warn.png'))
+        return Toast.richShow(msg, require('../../img/warn.png'))
     }
 
     static error(msg) {
-        return Toast.richShow(msg, require('./icon/error.png'))
+        return Toast.richShow(msg, require('../../img/error.png'))
     }
 }
 
