@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, TouchableOpacity,StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {observer} from 'mobx-react'
 
 import Theme from '../Theme'
 
-export default class Button extends TouchableOpacity {
+@observer
+export default class Button extends Component {
 
     static propTypes = {
         ...TouchableOpacity.propTypes,
@@ -20,7 +22,7 @@ export default class Button extends TouchableOpacity {
         size: 'md',
     };
 
-    buildProps() {
+    _renderChildren = () => {
         let {style, type, size, title, titleStyle, activeOpacity, children, ...others} = this.props;
 
         let backgroundColor, borderColor, borderWidth, borderRadius, paddingVertical, paddingHorizontal;
@@ -97,6 +99,7 @@ export default class Button extends TouchableOpacity {
             justifyContent: 'center',
             margin: StyleSheet.hairlineWidth
         }]//.concat(style);
+
         if (!React.isValidElement(title) && (title || title === '' || title === 0)) {
             titleStyle = [{
                 color: textColor,
@@ -106,21 +109,26 @@ export default class Button extends TouchableOpacity {
             title = <View style={style2}><Text style={titleStyle} numberOfLines={1}>{title}</Text></View>;
         }
         if (title) children = title;
-
-        this.props = {style, type, size, title, titleStyle, activeOpacity, children, ...others};
+        return children
     }
 
     render() {
-        this.buildProps();
-
         if (this.props.disabled) {
             return (
-                <View style={{opacity: 0.65}}>
-                    {super.render()}
-                </View>
+                <TouchableOpacity style={{opacity: 0.65}}>
+                    {super._renderChildren()}
+                </TouchableOpacity>
             );
         } else {
-            return super.render();
+            return <TouchableOpacity onPress={this.onPress}>
+                {this._renderChildren()}
+            </TouchableOpacity>;
+        }
+    }
+
+    onPress=()=>{
+        if(this.props.onPress){
+            this.props.onPress()
         }
     }
 }

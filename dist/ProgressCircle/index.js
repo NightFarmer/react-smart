@@ -1,4 +1,4 @@
-Object.defineProperty(exports,"__esModule",{value:true});var _jsxFileName='src/ProgressCircle/index.js';var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=require('react');var _react2=_interopRequireDefault(_react);
+Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _class,_jsxFileName='src/ProgressCircle/index.js';var _react=require('react');var _react2=_interopRequireDefault(_react);
 
 
 
@@ -14,37 +14,43 @@ var _reactNative=require('react-native');
 
 
 
+var _mobxReact=require('mobx-react');
 
 var _Theme=require('../Theme');var _Theme2=_interopRequireDefault(_Theme);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var
 
-ProgressCircle=function(_Component){_inherits(ProgressCircle,_Component);
+
+ProgressCircle=(0,_mobxReact.observer)(_class=function(_Component){_inherits(ProgressCircle,_Component);
 
 
 
 
 function ProgressCircle(props){_classCallCheck(this,ProgressCircle);var _this=_possibleConstructorReturn(this,(ProgressCircle.__proto__||Object.getPrototypeOf(ProgressCircle)).call(this,
-props));_this.rotateLeft=new _reactNative.Animated.Value(0.5);_this.rotateRight=new _reactNative.Animated.Value(0);
-_this.state={
-borderWidth:_this.props.borderWidth?_this.props.borderWidth:3,
-backgroundColor:_this.props.backgroundColor?_this.props.backgroundColor:'#FFF',
-borderColor:_this.props.borderColor?_this.props.borderColor:_Theme2.default.PrimaryColor,
-size:_this.props.size?_this.props.size:100};
+props));_this.rotateLeft=new _reactNative.Animated.Value(0.5);_this.rotateRight=new _reactNative.Animated.Value(0);_this.
 
 
-_this.setValue(_this.props.progress?_this.props.progress:0);return _this;
-}_createClass(ProgressCircle,[{key:'render',value:function render()
+
+
+
+
+
+
+
+
+_borderColor=function(){
+return _this.state.propsBorderColor?_this.state.propsBorderColor:_Theme2.default.PrimaryColor;
+};_this.state={borderWidth:_this.props.borderWidth?_this.props.borderWidth:3,backgroundColor:_this.props.backgroundColor?_this.props.backgroundColor:'#FFF',propsBorderColor:_this.props.borderColor,size:_this.props.size?_this.props.size:100};_this.setValue(_this.props.progress?_this.props.progress:0);return _this;}_createClass(ProgressCircle,[{key:'render',value:function render()
 
 {
 return _react2.default.createElement(_reactNative.View,{style:[styles.container,{
 backgroundColor:this.state.backgroundColor,
 width:this.state.size,
 height:this.state.size},
-this.props.style],__source:{fileName:_jsxFileName,lineNumber:38}},
+this.props.style],__source:{fileName:_jsxFileName,lineNumber:44}},
 
 _react2.default.createElement(_reactNative.View,{style:[styles.layer,{
 backgroundColor:this.state.backgroundColor,
 width:this.state.size/2,
-height:this.state.size}],__source:{fileName:_jsxFileName,lineNumber:44}},
+height:this.state.size}],__source:{fileName:_jsxFileName,lineNumber:50}},
 
 _react2.default.createElement(_reactNative.Animated.View,{style:[styles.arcLeft,{
 backgroundColor:this.state.backgroundColor,
@@ -53,7 +59,7 @@ height:this.state.size,
 transform:[{
 rotate:this.rotateLeft.interpolate({
 inputRange:[0,1],
-outputRange:['0deg','360deg']})}]}],__source:{fileName:_jsxFileName,lineNumber:49}},
+outputRange:['0deg','360deg']})}]}],__source:{fileName:_jsxFileName,lineNumber:55}},
 
 
 
@@ -62,7 +68,7 @@ width:this.state.size/2,
 height:this.state.size,
 position:'absolute',
 backgroundColor:this.state.backgroundColor,
-right:0},__source:{fileName:_jsxFileName,lineNumber:60}},
+right:0},__source:{fileName:_jsxFileName,lineNumber:66}},
 
 _react2.default.createElement(_reactNative.View,{style:[styles.bgd,{
 borderWidth:this.state.borderWidth,
@@ -70,21 +76,21 @@ width:this.state.size,
 height:this.state.size,
 borderRadius:this.state.size/2,
 position:'absolute',
-left:-this.state.size/2}],__source:{fileName:_jsxFileName,lineNumber:67}})),
+left:-this.state.size/2}],__source:{fileName:_jsxFileName,lineNumber:73}})),
 
 
 _react2.default.createElement(_reactNative.View,{style:{
 width:this.state.size/2,
 height:this.state.size,
 position:'absolute',
-backgroundColor:this.state.backgroundColor},__source:{fileName:_jsxFileName,lineNumber:76}},
+backgroundColor:this.state.backgroundColor},__source:{fileName:_jsxFileName,lineNumber:82}},
 
 _react2.default.createElement(_reactNative.View,{style:[styles.circleProgress,{
 borderWidth:this.state.borderWidth,
-borderColor:this.state.borderColor,
+borderColor:this._borderColor(),
 width:this.state.size,
 height:this.state.size,
-borderRadius:this.state.size/2}],__source:{fileName:_jsxFileName,lineNumber:82}})))),
+borderRadius:this.state.size/2}],__source:{fileName:_jsxFileName,lineNumber:88}})))),
 
 
 
@@ -92,7 +98,7 @@ borderRadius:this.state.size/2}],__source:{fileName:_jsxFileName,lineNumber:82}}
 _react2.default.createElement(_reactNative.View,{style:[styles.layer,{
 backgroundColor:this.state.backgroundColor,
 width:this.state.size/2,
-height:this.state.size}],__source:{fileName:_jsxFileName,lineNumber:92}},
+height:this.state.size}],__source:{fileName:_jsxFileName,lineNumber:98}},
 
 _react2.default.createElement(_reactNative.Animated.View,{style:[styles.arcRight,{
 backgroundColor:this.state.backgroundColor,
@@ -101,20 +107,20 @@ height:this.state.size,
 transform:[{
 rotate:this.rotateRight.interpolate({
 inputRange:[0,1],
-outputRange:['-180deg','180deg']})}]}],__source:{fileName:_jsxFileName,lineNumber:97}},
+outputRange:['-180deg','180deg']})}]}],__source:{fileName:_jsxFileName,lineNumber:103}},
 
 
 
 _react2.default.createElement(_reactNative.View,{style:{
 width:this.state.size/2,
 height:this.state.size,
-position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:108}},
+position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:114}},
 
 _react2.default.createElement(_reactNative.View,{style:[styles.bgd,{
 borderWidth:this.state.borderWidth,
 width:this.state.size,
 height:this.state.size,
-borderRadius:this.state.size/2}],__source:{fileName:_jsxFileName,lineNumber:113}})),
+borderRadius:this.state.size/2}],__source:{fileName:_jsxFileName,lineNumber:119}})),
 
 
 _react2.default.createElement(_reactNative.View,{style:{
@@ -122,15 +128,15 @@ width:this.state.size/2,
 height:this.state.size,
 position:'absolute',
 right:0,
-backgroundColor:this.state.backgroundColor},__source:{fileName:_jsxFileName,lineNumber:120}},
+backgroundColor:this.state.backgroundColor},__source:{fileName:_jsxFileName,lineNumber:126}},
 
 _react2.default.createElement(_reactNative.View,{style:[styles.circleProgress,{
 borderWidth:this.state.borderWidth,
-borderColor:this.state.borderColor,
+borderColor:this._borderColor(),
 width:this.state.size,
 height:this.state.size,
 borderRadius:this.state.size/2,
-left:-this.state.size/2}],__source:{fileName:_jsxFileName,lineNumber:127}})))));
+left:-this.state.size/2}],__source:{fileName:_jsxFileName,lineNumber:133}})))));
 
 
 
@@ -187,7 +193,7 @@ easing:_reactNative.Easing.linear}).
 start(function(){return console.log('finish');});
 });
 }
-}}]);return ProgressCircle;}(_react.Component);
+}}]);return ProgressCircle;}(_react.Component))||_class;
 
 
 var styles=_reactNative.StyleSheet.create({

@@ -16,9 +16,11 @@ import {
     TouchableWithoutFeedback,
     Image
 } from 'react-native';
+import {observer} from 'mobx-react'
 
 import Theme from '../Theme'
 
+@observer
 class CheckBox extends Component {
 
 
@@ -43,11 +45,11 @@ class CheckBox extends Component {
             return;
         }
         const checked = !this.state.checked;
-        if (!(typeof this.props.checked === 'boolean')) {
+        // if (!(typeof this.props.checked === 'boolean')) {
             this.setState({
                 checked,
             });
-        }
+        // }
         if (this.props.onChange) {
             this.props.onChange({checked});
         }

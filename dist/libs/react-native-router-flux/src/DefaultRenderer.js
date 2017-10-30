@@ -310,7 +310,8 @@ key:'card_'+key,
 style:[animationStyle,style],
 maskStyle:maskStyle,
 panHandlers:panHandlers,
-renderScene:DefaultRenderer.renderScene,__source:{fileName:_jsxFileName,lineNumber:307}})));
+renderScene:DefaultRenderer.renderScene,
+Actions:_Actions2.default,__source:{fileName:_jsxFileName,lineNumber:307}})));
 
 
 }}]);
@@ -354,9 +355,9 @@ SceneComponent=_TabBar2.default;
 if(SceneComponent){
 return(
 _react2.default.createElement(_reactNative.View,{
-style:[styles.sceneStyle,navigationState.sceneStyle],__source:{fileName:_jsxFileName,lineNumber:356}},
+style:[styles.sceneStyle,navigationState.sceneStyle],__source:{fileName:_jsxFileName,lineNumber:357}},
 
-_react2.default.createElement(SceneComponent,_extends({},this.props,navigationState,{__source:{fileName:_jsxFileName,lineNumber:359}}))));
+_react2.default.createElement(SceneComponent,_extends({},this.props,navigationState,{__source:{fileName:_jsxFileName,lineNumber:360}}))));
 
 
 }
@@ -390,7 +391,7 @@ navigationState:navigationState,
 style:[styles.animatedView,style],
 renderOverlay:DefaultRenderer.renderHeader,
 renderScene:DefaultRenderer.renderCard},
-optionals,{__source:{fileName:_jsxFileName,lineNumber:388}})));
+optionals,{__source:{fileName:_jsxFileName,lineNumber:389}})));
 
 
 }}]);return DefaultRenderer;}(_react.Component),_class.propTypes={navigationState:_propTypes2.default.object,onNavigate:_propTypes2.default.func},_class.childContextTypes={navigationState:_propTypes2.default.any},_temp);exports.default=DefaultRenderer;

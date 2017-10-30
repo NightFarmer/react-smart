@@ -14,9 +14,11 @@ import {
     DeviceEventEmitter,
     TouchableOpacity
 } from 'react-native';
+import {observer} from 'mobx-react'
 
 import Theme from '../Theme'
 
+@observer
 class ProgressCircle extends Component {
 
     rotateLeft = new Animated.Value(0.5);
@@ -27,11 +29,15 @@ class ProgressCircle extends Component {
         this.state = {
             borderWidth: this.props.borderWidth ? this.props.borderWidth : 3,
             backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : '#FFF',
-            borderColor: this.props.borderColor ? this.props.borderColor : Theme.PrimaryColor,
+            propsBorderColor: this.props.borderColor,
             size: this.props.size ? this.props.size : 100,
             // progress: 0.3
         };
         this.setValue(this.props.progress ? this.props.progress : 0)
+    }
+
+    _borderColor = () => {
+        return this.state.propsBorderColor ? this.state.propsBorderColor : Theme.PrimaryColor;
     }
 
     render() {
@@ -81,7 +87,7 @@ class ProgressCircle extends Component {
                     }}>
                         <View style={[styles.circleProgress, {
                             borderWidth: this.state.borderWidth,
-                            borderColor: this.state.borderColor,
+                            borderColor: this._borderColor(),
                             width: this.state.size,
                             height: this.state.size,
                             borderRadius: this.state.size / 2
@@ -126,7 +132,7 @@ class ProgressCircle extends Component {
                     }}>
                         <View style={[styles.circleProgress, {
                             borderWidth: this.state.borderWidth,
-                            borderColor: this.state.borderColor,
+                            borderColor: this._borderColor(),
                             width: this.state.size,
                             height: this.state.size,
                             borderRadius: this.state.size / 2,

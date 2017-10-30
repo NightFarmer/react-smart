@@ -5,9 +5,11 @@ import {
     Animated,
     PanResponder
 } from 'react-native'
+import {observer} from 'mobx-react'
 
 import Theme from '../Theme'
 
+@observer
 class Switch extends Component {
 
     rightAnim = new Animated.Value(0);

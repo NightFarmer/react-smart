@@ -7,13 +7,14 @@ import {
     Platform,
     Dimensions,
 } from 'react-native';
-
+import {observer} from 'mobx-react'
 import {Actions} from '../libs/react-native-router-flux'
 
 import Theme from '../Theme'
 
 import DeviceInfo from '../DeviceInfo'
 
+@observer
 class TopBar extends Component {
 
     render() {

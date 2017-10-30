@@ -127,21 +127,32 @@ NavigationCardStackPanResponder.forHorizontal(props):
 panHandlers;
 
 var index=props.scene.index;
-var maskPointerEvents=index===1||'auto'===pointerEvents?'none':'auto';
+
+var maskPointerEvents="none";
+
+if(index===0&&'box-only'===pointerEvents){
+props.Actions.poping=true;
+}
+if(index===0&&'auto'===pointerEvents){
+props.Actions.poping=false;
+if(props.Actions.pushCatch){
+props.Actions.pushCatch();
+}
+}
 
 return(
 React.createElement(Animated.View,_extends({},
 viewPanHandlers,{
 pointerEvents:pointerEvents,
 ref:this.props.onComponentRef,
-style:[styles.main,viewStyle],__source:{fileName:_jsxFileName,lineNumber:133}}),
+style:[styles.main,viewStyle],__source:{fileName:_jsxFileName,lineNumber:144}}),
 React.createElement(SceneView,{
 sceneRenderer:renderScene,
-sceneRendererProps:props,__source:{fileName:_jsxFileName,lineNumber:138}}),
+sceneRendererProps:props,__source:{fileName:_jsxFileName,lineNumber:149}}),
 
 
 !props.maskStyle?null:
-React.createElement(Animated.View,{style:[styles.mask,props.maskStyle],pointerEvents:maskPointerEvents,__source:{fileName:_jsxFileName,lineNumber:144}})));
+React.createElement(Animated.View,{style:[styles.mask,props.maskStyle],pointerEvents:maskPointerEvents,__source:{fileName:_jsxFileName,lineNumber:155}})));
 
 
 

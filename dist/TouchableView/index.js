@@ -30,7 +30,7 @@ _this.props.onPress();
 },_temp),_possibleConstructorReturn(_this,_ret);}_createClass(TouchableView,[{key:"render",value:function render(){return _react2.default.createElement(_reactNative.View,{style:this.parseParentStyle0(),__source:{fileName:_jsxFileName,lineNumber:14}},_react2.default.createElement(_reactNative.View,{style:[styles.fillParent,{backgroundColor:"#EEE"}],__source:{fileName:_jsxFileName,lineNumber:15}},_react2.default.createElement(_reactNative.TouchableOpacity,{style:[styles.fillParent,this.parseParentStyle1()],onPress:this.onPress,__source:{fileName:_jsxFileName,lineNumber:16}},_react2.default.createElement(_reactNative.View,{style:[styles.fillParent,this.parseParentStyle()],__source:{fileName:_jsxFileName,lineNumber:17}},this.props.children))));}},{key:"parseParentStyle0",value:function parseParentStyle0()
 
 {
-var style=this.props.style;
+var style=this.props.style?this.props.style:{};
 var result={};
 for(var key in style){
 if(style.hasOwnProperty(key)){
@@ -42,7 +42,7 @@ return result;
 }},{key:"parseParentStyle1",value:function parseParentStyle1()
 
 {
-var style=this.props.style;
+var style=this.props.style?this.props.style:{};
 var result={
 backgroundColor:style.backgroundColor?style.backgroundColor:"#FFF"};
 
@@ -57,7 +57,7 @@ return result;
 }},{key:"parseParentStyle",value:function parseParentStyle()
 
 {
-var style=this.props.style;
+var style=this.props.style?this.props.style:{};
 var result={
 alignItems:style.alignItems,
 justifyContent:style.justifyContent};

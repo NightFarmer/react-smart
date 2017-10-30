@@ -13,11 +13,13 @@ import {
     ActivityIndicator,
     DeviceEventEmitter
 } from 'react-native';
+import {observer} from 'mobx-react'
 
 import Theme from '../Theme'
 
 const {width, height} = Dimensions.get("window");
 
+@observer
 class SpinView extends Component {
 
     static EventType = "smart-span-view";
