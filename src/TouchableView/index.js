@@ -30,7 +30,7 @@ class TouchableView extends Component {
     }
 
     parseParentStyle0() {
-        let style = this.props.style;
+        let style = this.props.style?this.props.style:{};
         let result = {};
         for (let key in style) {
             if (style.hasOwnProperty(key)) {
@@ -42,7 +42,7 @@ class TouchableView extends Component {
     }
 
     parseParentStyle1() {
-        let style = this.props.style;
+        let style = this.props.style?this.props.style:{};
         let result = {
             backgroundColor: style.backgroundColor ? style.backgroundColor : "#FFF",
         };
@@ -57,7 +57,7 @@ class TouchableView extends Component {
     }
 
     parseParentStyle() {
-        let style = this.props.style;
+        let style = this.props.style?this.props.style:{};
         let result = {
             alignItems: style.alignItems,
             justifyContent: style.justifyContent,
