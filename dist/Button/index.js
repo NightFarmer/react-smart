@@ -23,7 +23,7 @@ Button=(0,_mobxReact.observer)(_class=(_temp2=_class2=function(_Component){_inhe
 
 
 _renderChildren=function(){var _this$props=
-_this.props,style=_this$props.style,type=_this$props.type,size=_this$props.size,title=_this$props.title,titleStyle=_this$props.titleStyle,activeOpacity=_this$props.activeOpacity,children=_this$props.children,others=_objectWithoutProperties(_this$props,['style','type','size','title','titleStyle','activeOpacity','children']);
+_this.props,buttonStyle=_this$props.buttonStyle,type=_this$props.type,size=_this$props.size,title=_this$props.title,titleStyle=_this$props.titleStyle,activeOpacity=_this$props.activeOpacity,children=_this$props.children,others=_objectWithoutProperties(_this$props,['buttonStyle','type','size','title','titleStyle','activeOpacity','children']);
 
 var backgroundColor=void 0,borderColor=void 0,borderWidth=void 0,borderRadius=void 0,paddingVertical=void 0,paddingHorizontal=void 0;
 var textColor=void 0,textFontSize=void 0;
@@ -97,8 +97,8 @@ overflow:'hidden',
 flexDirection:'row',
 alignItems:'center',
 justifyContent:'center',
-margin:_reactNative.StyleSheet.hairlineWidth}];
-
+margin:_reactNative.StyleSheet.hairlineWidth}].
+concat(buttonStyle);
 
 if(!_react2.default.isValidElement(title)&&(title||title===''||title===0)){
 titleStyle=[{
@@ -130,4 +130,4 @@ onPress=function(){
 if(_this.props.onPress){
 _this.props.onPress();
 }
-},_temp),_possibleConstructorReturn(_this,_ret);}_createClass(Button,[{key:'render',value:function render(){if(this.props.disabled){return _react2.default.createElement(_reactNative.TouchableOpacity,{style:{opacity:0.65},__source:{fileName:_jsxFileName,lineNumber:118}},_get(Button.prototype.__proto__||Object.getPrototypeOf(Button.prototype),'_renderChildren',this).call(this));}else{return _react2.default.createElement(_reactNative.TouchableOpacity,{onPress:this.onPress,__source:{fileName:_jsxFileName,lineNumber:123}},this._renderChildren());}}}]);return Button;}(_react.Component),_class2.propTypes=_extends({},_reactNative.TouchableOpacity.propTypes,{type:_propTypes2.default.oneOf(['default','primary','secondary','danger','link']),size:_propTypes2.default.oneOf(['xl','lg','md','sm','xs']),title:_propTypes2.default.oneOfType([_propTypes2.default.element,_propTypes2.default.string,_propTypes2.default.number]),titleStyle:_reactNative.Text.propTypes.style}),_class2.defaultProps=_extends({},_reactNative.TouchableOpacity.defaultProps,{type:'default',size:'md'}),_temp2))||_class;exports.default=Button;
+},_temp),_possibleConstructorReturn(_this,_ret);}_createClass(Button,[{key:'render',value:function render(){if(this.props.disabled){return _react2.default.createElement(_reactNative.TouchableOpacity,{style:[{opacity:0.65},this.props.style],__source:{fileName:_jsxFileName,lineNumber:118}},_get(Button.prototype.__proto__||Object.getPrototypeOf(Button.prototype),'_renderChildren',this).call(this));}else{return _react2.default.createElement(_reactNative.TouchableOpacity,{onPress:this.onPress,style:this.props.style,__source:{fileName:_jsxFileName,lineNumber:123}},this._renderChildren());}}}]);return Button;}(_react.Component),_class2.propTypes=_extends({},_reactNative.TouchableOpacity.propTypes,{type:_propTypes2.default.oneOf(['default','primary','secondary','danger','link']),size:_propTypes2.default.oneOf(['xl','lg','md','sm','xs']),title:_propTypes2.default.oneOfType([_propTypes2.default.element,_propTypes2.default.string,_propTypes2.default.number]),titleStyle:_reactNative.Text.propTypes.style}),_class2.defaultProps=_extends({},_reactNative.TouchableOpacity.defaultProps,{type:'default',size:'md'}),_temp2))||_class;exports.default=Button;

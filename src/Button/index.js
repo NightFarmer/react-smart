@@ -23,7 +23,7 @@ export default class Button extends Component {
     };
 
     _renderChildren = () => {
-        let {style, type, size, title, titleStyle, activeOpacity, children, ...others} = this.props;
+        let {buttonStyle, type, size, title, titleStyle, activeOpacity, children, ...others} = this.props;
 
         let backgroundColor, borderColor, borderWidth, borderRadius, paddingVertical, paddingHorizontal;
         let textColor, textFontSize;
@@ -98,7 +98,7 @@ export default class Button extends Component {
             alignItems: 'center',
             justifyContent: 'center',
             margin: StyleSheet.hairlineWidth
-        }]//.concat(style);
+        }].concat(buttonStyle);
 
         if (!React.isValidElement(title) && (title || title === '' || title === 0)) {
             titleStyle = [{
@@ -115,19 +115,19 @@ export default class Button extends Component {
     render() {
         if (this.props.disabled) {
             return (
-                <TouchableOpacity style={{opacity: 0.65}}>
+                <TouchableOpacity style={[{opacity: 0.65}, this.props.style]}>
                     {super._renderChildren()}
                 </TouchableOpacity>
             );
         } else {
-            return <TouchableOpacity onPress={this.onPress}>
+            return <TouchableOpacity onPress={this.onPress} style={this.props.style}>
                 {this._renderChildren()}
             </TouchableOpacity>;
         }
     }
 
-    onPress=()=>{
-        if(this.props.onPress){
+    onPress = () => {
+        if (this.props.onPress) {
             this.props.onPress()
         }
     }
