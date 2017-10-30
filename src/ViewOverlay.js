@@ -15,8 +15,7 @@ class ViewOverlay extends Component {
     }
 
     render() {
-        return (<View style={styles.viewOverlay}>
-            <View></View>
+        return (<View style={styles.viewOverlay} pointerEvents="box-none">
             {this.state.layerList.map((it) => it.view)}
             {this.state.toast}
             {this.state.spin}

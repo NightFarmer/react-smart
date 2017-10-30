@@ -126,6 +126,9 @@ class NavigationCard extends React.Component<any, Props, any> {
             NavigationCardStackPanResponder.forHorizontal(props) :
             panHandlers;
 
+        const index = props.scene.index;
+        const maskPointerEvents = (index === 1 || 'auto' === pointerEvents) ? 'none' : 'auto';
+        // console.warn(index, pointerEvents, props.scene.navigationState.key, maskPointerEvents)
         return (
             <Animated.View
                 {...viewPanHandlers}
@@ -138,7 +141,7 @@ class NavigationCard extends React.Component<any, Props, any> {
                 />
                 {
                     !props.maskStyle ? null :
-                        <Animated.View style={[styles.mask, props.maskStyle]} pointerEvents="box-none"/>
+                        <Animated.View style={[styles.mask, props.maskStyle]} pointerEvents={maskPointerEvents}/>
                 }
             </Animated.View>
         );
