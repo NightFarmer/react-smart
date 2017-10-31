@@ -37,8 +37,8 @@ props));_this.rotateLeft=new _reactNative.Animated.Value(0.5);_this.rotateRight=
 
 
 _borderColor=function(){
-return _this.state.propsBorderColor?_this.state.propsBorderColor:_Theme2.default.PrimaryColor;
-};_this.state={borderWidth:_this.props.borderWidth?_this.props.borderWidth:3,backgroundColor:_this.props.backgroundColor?_this.props.backgroundColor:'#FFF',propsBorderColor:_this.props.borderColor,size:_this.props.size?_this.props.size:100};_this.setValue(_this.props.progress?_this.props.progress:0);return _this;}_createClass(ProgressCircle,[{key:'render',value:function render()
+return _this.state.borderColor?_this.state.borderColor:_Theme2.default.PrimaryColor;
+};_this.state={borderWidth:_this.props.borderWidth?_this.props.borderWidth:3,backgroundColor:_this.props.backgroundColor?_this.props.backgroundColor:'#FFF',borderColor:_this.props.borderColor,size:_this.props.size?_this.props.size:100};_this.setValue(_this.props.progress?_this.props.progress:0);return _this;}_createClass(ProgressCircle,[{key:'render',value:function render()
 
 {
 return _react2.default.createElement(_reactNative.View,{style:[styles.container,{
@@ -165,7 +165,7 @@ this.animTo(props.progress?props.progress:0);
 }},{key:'animTo',value:function animTo(
 
 to){var _this2=this;
-console.log('to',to);
+
 var rightValue=Math.max(0,Math.min(0.5,to));
 var leftValue=Math.max(0.5,Math.min(1,to));
 if(rightValue<this.rotateRight.__getValue()){
@@ -178,7 +178,7 @@ _reactNative.Animated.timing(_this2.rotateRight,{
 toValue:rightValue,
 duration:2000*Math.abs(rightValue-_this2.rotateRight.__getValue()),
 easing:_reactNative.Easing.linear}).
-start(function(){return console.log('finish');});
+start();
 });
 }else{
 _reactNative.Animated.timing(this.rotateRight,{
@@ -190,7 +190,7 @@ _reactNative.Animated.timing(_this2.rotateLeft,{
 toValue:leftValue,
 duration:2000*Math.abs(leftValue-_this2.rotateLeft.__getValue()),
 easing:_reactNative.Easing.linear}).
-start(function(){return console.log('finish');});
+start();
 });
 }
 }}]);return ProgressCircle;}(_react.Component))||_class;

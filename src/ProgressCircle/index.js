@@ -29,7 +29,7 @@ class ProgressCircle extends Component {
         this.state = {
             borderWidth: this.props.borderWidth ? this.props.borderWidth : 3,
             backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : '#FFF',
-            propsBorderColor: this.props.borderColor,
+            borderColor: this.props.borderColor,
             size: this.props.size ? this.props.size : 100,
             // progress: 0.3
         };
@@ -37,7 +37,7 @@ class ProgressCircle extends Component {
     }
 
     _borderColor = () => {
-        return this.state.propsBorderColor ? this.state.propsBorderColor : Theme.PrimaryColor;
+        return this.state.borderColor ? this.state.borderColor : Theme.PrimaryColor;
     }
 
     render() {
@@ -165,7 +165,7 @@ class ProgressCircle extends Component {
     }
 
     animTo(to) {
-        console.log('to', to)
+        // console.log('to', to)
         let rightValue = Math.max(0, Math.min(0.5, to));
         let leftValue = Math.max(0.5, Math.min(1, to));
         if (rightValue < this.rotateRight.__getValue()) {
@@ -178,7 +178,7 @@ class ProgressCircle extends Component {
                     toValue: rightValue,
                     duration: 2000 * Math.abs(rightValue - this.rotateRight.__getValue()),
                     easing: Easing.linear
-                }).start(() => console.log('finish'))
+                }).start(/*() => console.log('finish')*/)
             });
         } else {
             Animated.timing(this.rotateRight, {
@@ -190,7 +190,7 @@ class ProgressCircle extends Component {
                     toValue: leftValue,
                     duration: 2000 * Math.abs(leftValue - this.rotateLeft.__getValue()),
                     easing: Easing.linear
-                }).start(() => console.log('finish'))
+                }).start(/*() => console.log('finish')*/)
             });
         }
     }
