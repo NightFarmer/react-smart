@@ -181,7 +181,6 @@ class LockPattern extends Component {
                 line.opacity.setValue(1)
                 line.left.setValue(inDot.centerPoint.x - this.size * 3 / 2)
                 line.top.setValue(inDot.centerPoint.y - this.size * 3 / 2)
-                this.pointStatck.splice(0)
                 this.pointStatck.push(inDot.index)
                 this.dotArr[inDot.index].borderWidth.setValue(this.borderWidthActive)
                 this.dotArr[inDot.index].showCenterDot.setValue(1)
@@ -202,6 +201,7 @@ class LockPattern extends Component {
             // console.log('latestIndex', latestIndex)
             if (!inDot || latestIndex === inDot.index || this.pointUsed(inDot.index)) {
                 let line = this.line[this.pointStatck.length - 1];
+                if (!line) return;
                 let latestPoint = this.index2Point(this.pointStatck[this.pointStatck.length - 1]);
                 let angle = this.angle(latestPoint, point);
                 // console.log(latestPoint, angle)
@@ -211,6 +211,7 @@ class LockPattern extends Component {
 
             } else if (inDot && !this.pointUsed(inDot.index)) {
                 let line = this.line[this.pointStatck.length - 1];
+                if (!line) return;
                 let latestPoint = this.index2Point(this.pointStatck[this.pointStatck.length - 1]);
                 let angle = this.angle(latestPoint, inDot.centerPoint);
                 line.rotate.setValue(angle)
@@ -239,6 +240,7 @@ class LockPattern extends Component {
     });
 
     reset() {
+        this.pointStatck.splice(0)
         this.setState({
             isWrong: false
         });
@@ -255,6 +257,7 @@ class LockPattern extends Component {
     finish = () => {
         // console.log(this.pointStatck)
         let line = this.line[this.pointStatck.length - 1];
+        if (!line) return;
         line.opacity.setValue(0)
         line.length.setValue(0)
         if (this.props.onFinish) {

@@ -181,7 +181,6 @@ var line=_this.line[0];
 line.opacity.setValue(1);
 line.left.setValue(inDot.centerPoint.x-_this.size*3/2);
 line.top.setValue(inDot.centerPoint.y-_this.size*3/2);
-_this.pointStatck.splice(0);
 _this.pointStatck.push(inDot.index);
 _this.dotArr[inDot.index].borderWidth.setValue(_this.borderWidthActive);
 _this.dotArr[inDot.index].showCenterDot.setValue(1);
@@ -202,6 +201,7 @@ var latestIndex=_this.pointStatck[_this.pointStatck.length-1];
 
 if(!inDot||latestIndex===inDot.index||_this.pointUsed(inDot.index)){
 var line=_this.line[_this.pointStatck.length-1];
+if(!line)return;
 var latestPoint=_this.index2Point(_this.pointStatck[_this.pointStatck.length-1]);
 var angle=_this.angle(latestPoint,point);
 
@@ -211,6 +211,7 @@ line.length.setValue(distance);
 
 }else if(inDot&&!_this.pointUsed(inDot.index)){
 var _line=_this.line[_this.pointStatck.length-1];
+if(!_line)return;
 var _latestPoint=_this.index2Point(_this.pointStatck[_this.pointStatck.length-1]);
 var _angle=_this.angle(_latestPoint,inDot.centerPoint);
 _line.rotate.setValue(_angle);
@@ -252,9 +253,11 @@ return true;
 
 
 
+
 finish=function(){
 
 var line=_this.line[_this.pointStatck.length-1];
+if(!line)return;
 line.opacity.setValue(0);
 line.length.setValue(0);
 if(_this.props.onFinish){
@@ -263,7 +266,7 @@ _this.setState({
 isWrong:!result});
 
 }
-};_this.size=_this.props.size?_this.props.size:300;_this.lineWidth=_this.props.lineWidth?_this.props.lineWidth:7;_this.borderWidth=_this.props.lineWidth?_this.props.lineWidth:1;_this.borderWidthActive=_this.props.lineWidth?_this.props.lineWidth:2;_this.line=[];_this.dotArr=[];for(var i=0;i<9;i++){_this.line.push({left:new _reactNative.Animated.Value(0),top:new _reactNative.Animated.Value(0),length:new _reactNative.Animated.Value(0),opacity:new _reactNative.Animated.Value(0),rotate:new _reactNative.Animated.Value(45)});_this.dotArr.push({showCenterDot:new _reactNative.Animated.Value(0),borderWidth:new _reactNative.Animated.Value(_this.borderWidth)});}_this.pointStatck=[];_this.state={isWrong:false};return _this;}_createClass(LockPattern,[{key:'render',value:function render(){var size=this.size;return _react2.default.createElement(_reactNative.View,{style:[{backgroundColor:"#FFF"},this.props.style,{width:size,height:size}],__source:{fileName:_jsxFileName,lineNumber:62}},_react2.default.createElement(_reactNative.View,{style:{width:size,height:size,position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:63}},this.renderLine()),_react2.default.createElement(_reactNative.View,{style:{width:size,height:size,position:'absolute',flexWrap:'wrap',flexDirection:"row"},__source:{fileName:_jsxFileName,lineNumber:66}},this.renderDot()),_react2.default.createElement(_reactNative.View,_extends({style:{width:size,height:size,position:'absolute'}},this.panResponder.panHandlers,{pointerEvents:'box-only',__source:{fileName:_jsxFileName,lineNumber:75}})));}},{key:'reset',value:function reset(){var _this2=this;this.setState({isWrong:false});this.line.forEach(function(it){it.opacity.setValue(0);it.length.setValue(0);});this.dotArr.forEach(function(it){it.borderWidth.setValue(_this2.borderWidth);it.showCenterDot.setValue(0);});}},{key:'angle',value:function angle(
+};_this.size=_this.props.size?_this.props.size:300;_this.lineWidth=_this.props.lineWidth?_this.props.lineWidth:7;_this.borderWidth=_this.props.lineWidth?_this.props.lineWidth:1;_this.borderWidthActive=_this.props.lineWidth?_this.props.lineWidth:2;_this.line=[];_this.dotArr=[];for(var i=0;i<9;i++){_this.line.push({left:new _reactNative.Animated.Value(0),top:new _reactNative.Animated.Value(0),length:new _reactNative.Animated.Value(0),opacity:new _reactNative.Animated.Value(0),rotate:new _reactNative.Animated.Value(45)});_this.dotArr.push({showCenterDot:new _reactNative.Animated.Value(0),borderWidth:new _reactNative.Animated.Value(_this.borderWidth)});}_this.pointStatck=[];_this.state={isWrong:false};return _this;}_createClass(LockPattern,[{key:'render',value:function render(){var size=this.size;return _react2.default.createElement(_reactNative.View,{style:[{backgroundColor:"#FFF"},this.props.style,{width:size,height:size}],__source:{fileName:_jsxFileName,lineNumber:62}},_react2.default.createElement(_reactNative.View,{style:{width:size,height:size,position:'absolute'},__source:{fileName:_jsxFileName,lineNumber:63}},this.renderLine()),_react2.default.createElement(_reactNative.View,{style:{width:size,height:size,position:'absolute',flexWrap:'wrap',flexDirection:"row"},__source:{fileName:_jsxFileName,lineNumber:66}},this.renderDot()),_react2.default.createElement(_reactNative.View,_extends({style:{width:size,height:size,position:'absolute'}},this.panResponder.panHandlers,{pointerEvents:'box-only',__source:{fileName:_jsxFileName,lineNumber:75}})));}},{key:'reset',value:function reset(){var _this2=this;this.pointStatck.splice(0);this.setState({isWrong:false});this.line.forEach(function(it){it.opacity.setValue(0);it.length.setValue(0);});this.dotArr.forEach(function(it){it.borderWidth.setValue(_this2.borderWidth);it.showCenterDot.setValue(0);});}},{key:'angle',value:function angle(
 
 start,end){
 var diff_x=end.x-start.x,
