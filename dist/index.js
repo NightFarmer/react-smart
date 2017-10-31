@@ -1,4 +1,4 @@
-Object.defineProperty(exports,"__esModule",{value:true});exports.Switch=exports.TouchableView=exports.RowGroup=exports.Theme=exports.Popup=exports.ActionSheet=exports.CheckBox=exports.Dialog=exports.Http=exports.Button=exports.ProgressCircle=exports.SpinProgress=exports.Spin=exports.Toast=exports.TopBar=exports.Scene=exports.Router=exports.Actions=undefined;var _Actions=require('./libs/react-native-router-flux/src/Actions');var _Actions2=_interopRequireDefault(_Actions);
+Object.defineProperty(exports,"__esModule",{value:true});exports.Switch=exports.TouchableView=exports.RowGroup=exports.Theme=exports.Popup=exports.ActionSheet=exports.CheckBox=exports.Dialog=exports.Http=exports.Button=exports.ProgressCircle=exports.SpinProgress=exports.Spin=exports.Toast=exports.TopBar=exports.Scene=exports.Router=exports.Actions=exports.observer=exports.observable=undefined;var _Actions=require('./libs/react-native-router-flux/src/Actions');var _Actions2=_interopRequireDefault(_Actions);
 
 
 
@@ -33,13 +33,17 @@ var _TouchableView=require('./TouchableView');var _TouchableView2=_interopRequir
 var _Switch=require('./Switch');var _Switch2=_interopRequireDefault(_Switch);
 
 
-var _Theme=require('./Theme');var _Theme2=_interopRequireDefault(_Theme);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}exports.
+var _Theme=require('./Theme');var _Theme2=_interopRequireDefault(_Theme);
 
 
 
 
 
+var _mobx=require('mobx');
+var _mobxReact=require('mobx-react');function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}exports.
 
+observable=_mobx.observable;exports.
+observer=_mobxReact.observer;exports.
 
 Actions=_Actions2.default;exports.
 

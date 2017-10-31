@@ -48,7 +48,25 @@ class Theme {
     @action setTheme = (theme) => {
         for (let key in theme) {
             if (theme.hasOwnProperty(key)) {
-                this[key] = theme[key];
+                if (this.customValues.hasOwnProperty(key)) {
+                    this.customValues[key] = theme[key]
+                } else {
+                    this[key] = theme[key];
+                }
+            }
+        }
+    };
+
+    @observable
+    customValues;
+
+    @action register = (value) => {
+        this.customValues = observable(value)
+        for (let key in value) {
+            if (value.hasOwnProperty(key)) {
+                this.__defineGetter__(key, function () {
+                    return this.customValues[key]
+                })
             }
         }
     }

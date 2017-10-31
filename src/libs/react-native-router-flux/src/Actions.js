@@ -9,6 +9,7 @@
 import {assert} from './Util';
 import Scene from './Scene';
 import * as ActionConst from './ActionConst';
+import {observer} from 'mobx-react'
 
 export const ActionMap = {
     jump: ActionConst.JUMP,
@@ -88,7 +89,7 @@ class Actions {
             type = ActionConst.JUMP;
         }
         const inheritProps = getInheritProps(parentProps);
-        const componentProps = component ? {component: wrapBy(component)} : {};
+        const componentProps = component ? {component: observer(wrapBy(component))} : {};
         // wrap other components
         if (wrapBy) {
             Object.keys(staticProps).forEach((prop) => {

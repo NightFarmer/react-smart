@@ -18,6 +18,7 @@ import DeviceInfo from '../DeviceInfo'
 class TopBar extends Component {
 
     render() {
+        this.setStatusBarStyle()
         return (<View style={{alignSelf: "stretch", alignItems: 'stretch'}}>
             {
                 !this.statusBarCouldTranslucent() ? null :
@@ -58,8 +59,8 @@ class TopBar extends Component {
         this.setStatusBarStyle()
     }
 
-    setStatusBarStyle() {
-        if (Theme.StatusBarMode === 1) {
+    setStatusBarStyle = () => {
+        if (this.statusBarMode() === 1) {
             StatusBar.setBackgroundColor('#0000');
             StatusBar.setTranslucent(true)
         } else {
@@ -71,11 +72,18 @@ class TopBar extends Component {
         // StatusBar.setBarStyle('default', true);
     }
 
-    statusBarCouldTranslucent() {
+    statusBarMode = () => {
+        return Platform.select({
+            ios: 1,
+            android: Theme.StatusBarMode
+        });
+    }
+
+    statusBarCouldTranslucent = () => {
         return Platform.select({
             ios: true,
             android: DeviceInfo.Android.SDK_INT ? DeviceInfo.Android.SDK_INT > 19 : true,
-        }) && Theme.StatusBarMode === 1
+        }) && this.statusBarMode() === 1
     }
 
     getStatusHeight = () => {

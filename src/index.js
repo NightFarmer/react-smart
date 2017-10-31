@@ -39,8 +39,12 @@ import Theme from './Theme'
 //
 //     Theme: ThemeConfigure
 // };
-
+import {observable} from 'mobx'
+import {observer} from 'mobx-react'
 export {
+    observable,
+    observer,
+
     Actions,
     // ActionConst,
     // DefaultRenderer,

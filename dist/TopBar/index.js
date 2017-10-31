@@ -59,24 +59,32 @@ TopBar=(0,_mobxReact.observer)(_class=function(_Component){_inherits(TopBar,_Com
 
 
 
+setStatusBarStyle=function(){
+if(_this.statusBarMode()===1){
+_reactNative.StatusBar.setBackgroundColor('#0000');
+_reactNative.StatusBar.setTranslucent(true);
+}else{
+_reactNative.StatusBar.setBackgroundColor(_Theme2.default.StatusBarColor);
+_reactNative.StatusBar.setTranslucent(false);
+}
 
 
 
+},_this.
 
+statusBarMode=function(){
+return _reactNative.Platform.select({
+ios:1,
+android:_Theme2.default.StatusBarMode});
 
+},_this.
 
-
-
-
-
-
-
-
-
-
-
-
-
+statusBarCouldTranslucent=function(){
+return _reactNative.Platform.select({
+ios:true,
+android:_DeviceInfo2.default.Android.SDK_INT?_DeviceInfo2.default.Android.SDK_INT>19:true})&&
+_this.statusBarMode()===1;
+},_this.
 
 getStatusHeight=function(){
 return _reactNative.Platform.select({
@@ -91,7 +99,7 @@ _reactNative.Dimensions.get('window'),height=_Dimensions$get.height,width=_Dimen
 var iphoneX=parseFloat((width/height).toString().substring(0,5));
 var iphoneY=parseFloat((height/width).toString().substring(0,5));
 return _reactNative.Platform.OS==='ios'&&iphoneX===2.165||_reactNative.Platform.OS==='ios'&&iphoneY===2.165;
-},_temp),_possibleConstructorReturn(_this,_ret);}_createClass(TopBar,[{key:'render',value:function render(){var _this2=this;return _react2.default.createElement(_reactNative.View,{style:{alignSelf:"stretch",alignItems:'stretch'},__source:{fileName:_jsxFileName,lineNumber:21}},!this.statusBarCouldTranslucent()?null:_react2.default.createElement(_reactNative.View,{style:{height:this.getStatusHeight(),backgroundColor:_Theme2.default.StatusBarColor},__source:{fileName:_jsxFileName,lineNumber:24}}),_react2.default.createElement(_reactNative.View,{style:[styles.topBar,{backgroundColor:_Theme2.default.TopBarBackgroundColor,borderBottomWidth:_Theme2.default.TopBarBorderWidth,borderBottomColor:_Theme2.default.TopBarBorderColor,height:_Theme2.default.TopBarHeight}],__source:{fileName:_jsxFileName,lineNumber:26}},this.props.hideBack?null:_react2.default.createElement(_reactNative.TouchableOpacity,{style:styles.backIcon,onPress:function onPress(){if(_this2.props.onBackPress){_this2.props.onBackPress();}else{_reactNativeRouterFlux.Actions.pop();}},__source:{fileName:_jsxFileName,lineNumber:34}},_react2.default.createElement(_reactNative.Image,{source:require('../../img/back.png'),style:[styles.backIconImg,{tintColor:_Theme2.default.TopBarElementColor}],__source:{fileName:_jsxFileName,lineNumber:41}})),this.props.children?this.props.children:_react2.default.createElement(_reactNative.Text,{style:[styles.title,{color:_Theme2.default.TopBarElementColor}],__source:{fileName:_jsxFileName,lineNumber:47}},this.props.title)));}},{key:'componentWillMount',value:function componentWillMount(){this.setStatusBarStyle();}},{key:'componentDidMount',value:function componentDidMount(){this.setStatusBarStyle();}},{key:'setStatusBarStyle',value:function setStatusBarStyle(){if(_Theme2.default.StatusBarMode===1){_reactNative.StatusBar.setBackgroundColor('#0000');_reactNative.StatusBar.setTranslucent(true);}else{_reactNative.StatusBar.setBackgroundColor(_Theme2.default.StatusBarColor);_reactNative.StatusBar.setTranslucent(false);}}},{key:'statusBarCouldTranslucent',value:function statusBarCouldTranslucent(){return _reactNative.Platform.select({ios:true,android:_DeviceInfo2.default.Android.SDK_INT?_DeviceInfo2.default.Android.SDK_INT>19:true})&&_Theme2.default.StatusBarMode===1;}}]);return TopBar;}(_react.Component))||_class;
+},_temp),_possibleConstructorReturn(_this,_ret);}_createClass(TopBar,[{key:'render',value:function render(){var _this2=this;this.setStatusBarStyle();return _react2.default.createElement(_reactNative.View,{style:{alignSelf:"stretch",alignItems:'stretch'},__source:{fileName:_jsxFileName,lineNumber:22}},!this.statusBarCouldTranslucent()?null:_react2.default.createElement(_reactNative.View,{style:{height:this.getStatusHeight(),backgroundColor:_Theme2.default.StatusBarColor},__source:{fileName:_jsxFileName,lineNumber:25}}),_react2.default.createElement(_reactNative.View,{style:[styles.topBar,{backgroundColor:_Theme2.default.TopBarBackgroundColor,borderBottomWidth:_Theme2.default.TopBarBorderWidth,borderBottomColor:_Theme2.default.TopBarBorderColor,height:_Theme2.default.TopBarHeight}],__source:{fileName:_jsxFileName,lineNumber:27}},this.props.hideBack?null:_react2.default.createElement(_reactNative.TouchableOpacity,{style:styles.backIcon,onPress:function onPress(){if(_this2.props.onBackPress){_this2.props.onBackPress();}else{_reactNativeRouterFlux.Actions.pop();}},__source:{fileName:_jsxFileName,lineNumber:35}},_react2.default.createElement(_reactNative.Image,{source:require('../../img/back.png'),style:[styles.backIconImg,{tintColor:_Theme2.default.TopBarElementColor}],__source:{fileName:_jsxFileName,lineNumber:42}})),this.props.children?this.props.children:_react2.default.createElement(_reactNative.Text,{style:[styles.title,{color:_Theme2.default.TopBarElementColor}],__source:{fileName:_jsxFileName,lineNumber:48}},this.props.title)));}},{key:'componentWillMount',value:function componentWillMount(){this.setStatusBarStyle();}},{key:'componentDidMount',value:function componentDidMount(){this.setStatusBarStyle();}}]);return TopBar;}(_react.Component))||_class;
 
 
 var styles=_reactNative.StyleSheet.create({
