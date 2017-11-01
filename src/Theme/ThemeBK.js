@@ -43,7 +43,8 @@ class Theme {
         this._StatusBarColor = value
     }
 
-
+    //TouchableView点击遮罩颜色
+    TouchableViewMaskColor = "#0001"
     //===========================================
      setTheme = (theme) => {
         for (let key in theme) {

@@ -40,7 +40,7 @@ RowGroup.Row=function(_Component2){_inherits(_class,_Component2);function _class
 
 {
 return(
-_react2.default.createElement(_reactNative.View,{style:{padding:10},__source:{fileName:_jsxFileName,lineNumber:43}},
+_react2.default.createElement(_reactNative.View,{style:[this.props.style,{padding:10}],__source:{fileName:_jsxFileName,lineNumber:43}},
 this.props.children));
 
 

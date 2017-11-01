@@ -43,6 +43,7 @@ class Theme {
         this._StatusBarColor = value
     }
 
+    @observable TouchableViewMaskColor = "#0001";
 
     //===========================================
     @action setTheme = (theme) => {

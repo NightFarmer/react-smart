@@ -44,6 +44,7 @@ StatusBarMode=1;this.
 
 
 
+TouchableViewMaskColor="#0001";this.
 
 setTheme=function(theme){
 for(var key in theme){

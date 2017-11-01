@@ -32,6 +32,7 @@ import RowGroup from './RowGroup'
 import TouchableView from './TouchableView'
 import Switch from './Switch'
 import LockPattern from './LockPattern'
+import NumberInput from './NumberInput'
 
 
 import Theme from './Theme'
@@ -74,5 +75,6 @@ export {
     RowGroup,
     TouchableView,
     Switch,
-    LockPattern
+    LockPattern,
+    NumberInput
 };

@@ -40,7 +40,7 @@ RowGroup.Row = class extends Component {
 
     render() {
         return (
-            <View style={{padding: 10}}>
+            <View style={[this.props.style, {padding: 10}]}>
                 {this.props.children}
             </View>
         )

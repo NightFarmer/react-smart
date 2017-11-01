@@ -4,21 +4,25 @@ import {
     StatusBar,
     Image,
     TouchableOpacity,
+    PanResponder
 } from 'react-native';
 
+import Theme from '../Theme'
+import {observer} from 'mobx-react'
 
+@observer
 class TouchableView extends Component {
+
+    maskOpacity = new Animated.Value(0);
 
     render() {
         return (
-            <View style={this.parseParentStyle0()}>
-                <View style={[styles.fillParent, {backgroundColor: "#EEE"}]}>
-                    <TouchableOpacity style={[styles.fillParent, this.parseParentStyle1()]} onPress={this.onPress}>
-                        <View style={[styles.fillParent, this.parseParentStyle()]}>
-                            {this.props.children}
-                        </View>
-                    </TouchableOpacity>
-                </View>
+            <View style={[this.props.style]} {...this.panResponder.panHandlers}>
+                <Animated.View style={[styles.fillParent, {
+                    backgroundColor: this.props.maskColor ? this.props.maskColor : Theme.TouchableViewMaskColor,
+                    opacity: this.maskOpacity
+                }]}/>
+                {this.props.children}
             </View>
         )
     }
@@ -27,49 +31,46 @@ class TouchableView extends Component {
         if (this.props.onPress) {
             this.props.onPress()
         }
-    }
+    };
 
-    parseParentStyle0() {
-        let style = this.props.style?this.props.style:{};
-        let result = {};
-        for (let key in style) {
-            if (style.hasOwnProperty(key)) {
-                if (key.indexOf('padding') !== -1) continue;
-                result[key] = style[key]
-            }
-        }
-        return result
-    }
+    panResponder = PanResponder.create({
+        onStartShouldSetPanResponder: (evt, gestureState) => true,
+        onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+        onMoveShouldSetPanResponder: (evt, gestureState) => true,
+        onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
 
-    parseParentStyle1() {
-        let style = this.props.style?this.props.style:{};
-        let result = {
-            backgroundColor: style.backgroundColor ? style.backgroundColor : "#FFF",
-        };
-        for (let key in style) {
-            if (style.hasOwnProperty(key)) {
-                if (key.indexOf('padding') !== -1) {
-                    result[key] = style[key]
-                }
-            }
-        }
-        return result
-    }
+        onPanResponderGrant: (evt, gestureState) => {
+            this.maskOpacity.setValue(1)
+        },
+        onPanResponderMove: (evt, gestureState) => {
 
-    parseParentStyle() {
-        let style = this.props.style?this.props.style:{};
-        let result = {
-            alignItems: style.alignItems,
-            justifyContent: style.justifyContent,
-        };
-        return result
-    }
+        },
+        onPanResponderTerminationRequest: (evt, gestureState) => true,
+        onPanResponderRelease: (evt, gestureState) => {
+            // this.finish()
+            Animated.timing(this.maskOpacity, {
+                toValue: 0,
+                duration: 100,
+            }).start();
+            this.onPress()
+        },
+        onPanResponderTerminate: (evt, gestureState) => {
+            // this.finish()
+            Animated.timing(this.maskOpacity, {
+                toValue: 0,
+                duration: 100,
+            }).start()
+        },
+        onShouldBlockNativeResponder: (evt, gestureState) => {
+            return false;
+        },
+    });
+
 }
 
 const styles = StyleSheet.create({
     fillParent: {
-        alignSelf: "stretch",
-        flex: 1
+        position: 'absolute', left: 0, right: 0, top: 0, bottom: 0
     }
 });
 
