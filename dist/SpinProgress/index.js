@@ -26,10 +26,11 @@ event:'dismiss'});
 
 }},{key:'update',value:function update(
 
-value){
+value,message){
 _reactNative.DeviceEventEmitter.emit(_SpinView2.default.EventType,{
 event:'update',
-value:value});
+value:value,
+message:message});
 
 }}]);return Spin;}();exports.default=
 

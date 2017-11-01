@@ -15,9 +15,12 @@ import {
 } from 'react-native';
 
 import ProgressCircle from '../ProgressCircle'
+import Theme from '../Theme'
+import {observer} from 'mobx-react'
 
 const {width, height} = Dimensions.get("window");
 
+@observer
 class SpinView extends Component {
 
     static EventType = "smart-span-progress-view";
@@ -28,14 +31,27 @@ class SpinView extends Component {
         super(props);
         this.state = {
             message: this.props.info.message ? this.props.info.message : '',
-            progress: 0
+            progress: 0,
+
+            circleHide: true
         }
     }
 
     render() {
         return (<Animated.View style={[styles.container, this.buildStyle()]}>
             <Animated.View style={[styles.spinCard, this.buildStyle()]}>
-                <ProgressCircle size={width * 0.12} color="#337ab7" style={styles.indicator}
+                <View style={[styles.indicator, {
+                    position: "absolute",
+                    borderWidth: 3,
+                    borderColor: this.state.progress === 1 ? Theme.PrimaryColor : "#d9d9d9",
+                    borderRadius: width * 0.06,
+                    height: width * 0.12,
+                    width: width * 0.12,
+                    top: (width * 0.15 - width * 0.12) / 2 + 10,
+                    opacity: this.state.circleHide ? 1 : 0,
+                }]}/>
+                <ProgressCircle size={width * 0.12} color={Theme.PrimaryColor}
+                                style={[styles.indicator, {opacity: this.state.circleHide ? 0 : 1}]}
                                 progress={this.state.progress}/>
                 <Text style={styles.label}>{this.state.message}</Text>
             </Animated.View>
@@ -52,7 +68,8 @@ class SpinView extends Component {
     componentWillReceiveProps(nextProps) {
         this.setState({
             message: nextProps.info.message ? nextProps.info.message : '',
-            progress: 0
+            progress: 0,
+            circleHide: false
         })
         // clearTimeout(this.dismissHandler)
         // this.timingDismiss()
@@ -65,7 +82,8 @@ class SpinView extends Component {
                 this.dismiss()
             } else if (event.event === 'update') {
                 this.setState({
-                    progress: event.value
+                    progress: event.value,
+                    message: event.message ? event.message : this.state.message,
                 })
             }
         });
@@ -76,7 +94,7 @@ class SpinView extends Component {
                 duration: 100,
                 easing: Easing.linear
             },
-        ).start();
+        ).start(() => this.setState({circleHide: false}));
     }
 
     componentWillUnmount() {
@@ -90,6 +108,7 @@ class SpinView extends Component {
     };
 
     dismiss = () => {
+        this.setState({circleHide: true})
         Animated.timing(
             this.opacityAnim,
             {
@@ -130,7 +149,6 @@ const styles = StyleSheet.create({
     indicator: {
         height: width * 0.15,
         alignSelf: 'center',
-
     },
     label: {
         fontSize: width * 0.035,

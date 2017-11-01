@@ -26,10 +26,11 @@ class Spin {
         })
     }
 
-    static update(value) {
+    static update(value, message) {
         DeviceEventEmitter.emit(SpinView.EventType, {
             event: 'update',
-            value
+            value,
+            message
         })
     }
 }
