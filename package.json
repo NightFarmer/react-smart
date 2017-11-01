@@ -1,11 +1,15 @@
 {
   "name": "react-smart",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/NightFarmer/react-smart.git"
   },
   "author": "NightFarmer",
   "license": "ISC",
