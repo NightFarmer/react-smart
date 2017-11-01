@@ -59,7 +59,7 @@ class Theme {
     };
 
     @observable
-    customValues;
+    customValues = {};
 
     @action register = (value) => {
         this.customValues = observable(value)

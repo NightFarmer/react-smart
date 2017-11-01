@@ -1,7 +1,7 @@
 # React-Smart
 
 ## 简介
-一套基于ReactNative快速开发的组件库.
+一套基于ReactNative的快速开发组件库.
 ## 特性
 - 路由
   - Actions
