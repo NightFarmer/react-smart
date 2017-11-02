@@ -43,29 +43,27 @@ class TouchableView extends Component {
             this.maskOpacity.setValue(1)
         },
         onPanResponderMove: (evt, gestureState) => {
-
+            // this.upAnim();
         },
         onPanResponderTerminationRequest: (evt, gestureState) => true,
         onPanResponderRelease: (evt, gestureState) => {
-            // this.finish()
-            Animated.timing(this.maskOpacity, {
-                toValue: 0,
-                duration: 100,
-            }).start();
+            this.upAnim();
             this.onPress()
         },
         onPanResponderTerminate: (evt, gestureState) => {
-            // this.finish()
-            Animated.timing(this.maskOpacity, {
-                toValue: 0,
-                duration: 100,
-            }).start()
+            this.upAnim();
         },
         onShouldBlockNativeResponder: (evt, gestureState) => {
             return false;
         },
     });
 
+    upAnim() {
+        Animated.timing(this.maskOpacity, {
+            toValue: 0,
+            duration: 100,
+        }).start()
+    }
 }
 
 const styles = StyleSheet.create({

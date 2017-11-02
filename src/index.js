@@ -33,6 +33,7 @@ import TouchableView from './TouchableView'
 import Switch from './Switch'
 import LockPattern from './LockPattern'
 import NumberInput from './NumberInput'
+import GridView from './GridView'
 
 
 import Theme from './Theme'
@@ -77,5 +78,6 @@ export {
     TouchableView,
     Switch,
     LockPattern,
-    NumberInput
+    NumberInput,
+    GridView
 };

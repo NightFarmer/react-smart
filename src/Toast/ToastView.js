@@ -23,7 +23,7 @@ class ToastView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: this.props.info.message ? this.props.info.message : ''
+            message: this.props.info.message !== undefined ? this.props.info.message : ''
         }
     }
 
@@ -49,7 +49,7 @@ class ToastView extends Component {
     componentWillReceiveProps(nextProps) {
         // console.log(nextProps.info.message)
         this.setState({
-            message: nextProps.info.message ? nextProps.info.message : ''
+            message: nextProps.info.message !== undefined ? nextProps.info.message : ''
         })
         clearTimeout(this.dismissHandler)
         this.timingDismiss()

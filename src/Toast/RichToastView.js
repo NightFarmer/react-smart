@@ -24,7 +24,7 @@ class RichToastView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: this.props.info.message ? this.props.info.message : '',
+            message: this.props.info.message !== undefined ? this.props.info.message : '',
             icon: this.props.info.icon ? this.props.info.icon : require('../../img/info.png'),
         }
     }
@@ -54,7 +54,7 @@ class RichToastView extends Component {
     componentWillReceiveProps(nextProps) {
         // console.log(nextProps.info.message)
         this.setState({
-            message: nextProps.info.message ? nextProps.info.message : '',
+            message: nextProps.info.message !== undefined ? nextProps.info.message : '',
             icon: nextProps.info.icon ? nextProps.info.icon : require('../../img/info.png'),
         })
         clearTimeout(this.dismissHandler)

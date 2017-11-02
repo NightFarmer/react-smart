@@ -1,14 +1,14 @@
-import {observable, action} from 'mobx'
+import {observable, action, computed} from 'mobx'
 
 // import ThemeConfigure from './ThemeConfigure'
 
 class Theme {
 
-     PrimaryColor = "#3ea0f2";
-     PrimaryDarkColor = "#3a96e4";
+    PrimaryColor = "#3ea0f2";
+    PrimaryDarkColor = "#3a96e4";
 
     //TopBar背景色==========================================
-     _TopBarBackgroundColor;
+    _TopBarBackgroundColor;
     get TopBarBackgroundColor() {
         if (this._TopBarBackgroundColor === undefined) {
             return this.PrimaryColor
@@ -21,17 +21,17 @@ class Theme {
     }
 
     //TopBar元素颜色=========================================
-     TopBarElementColor = "#FFF";
+    TopBarElementColor = "#FFF";
     //TopBar边框宽度
-     TopBarBorderWidth = 0;
+    TopBarBorderWidth = 0;
     //TopBar边框颜色
-      TopBarBorderColor = "#a2a2a2";
+    TopBarBorderColor = "#a2a2a2";
     //TopBar高度
-      TopBarHeight = 45;
+    TopBarHeight = 45;
     //StatusBar模式===================================
-     StatusBarMode = 1;//1沉浸,2染色
+    StatusBarMode = 1;//1沉浸,2染色
     //StatusBar背景色=========================
-     _StatusBarColor;
+    _StatusBarColor;
     get StatusBarColor() {
         if (this._StatusBarColor === undefined) {
             return this.PrimaryColor
@@ -46,7 +46,7 @@ class Theme {
     //TouchableView点击遮罩颜色
     TouchableViewMaskColor = "#0001"
     //===========================================
-     setTheme = (theme) => {
+    setTheme = (theme) => {
         for (let key in theme) {
             if (theme.hasOwnProperty(key)) {
                 if (this.customValues.hasOwnProperty(key)) {
@@ -58,10 +58,10 @@ class Theme {
         }
     };
 
-    
+
     customValues;
 
-     register = (value) => {
+    register = (value) => {
         this.customValues = observable(value)
         for (let key in value) {
             if (value.hasOwnProperty(key)) {
@@ -71,6 +71,27 @@ class Theme {
             }
         }
     }
+    createStyle = (styleRender) => {
+        return new StyleHolder(styleRender)
+    }
+}
+
+class StyleHolder {
+
+    constructor(getStyle) {
+        let stylesSheet = computed(() => {
+            return getStyle()
+        });
+        let style = getStyle();
+        for (let key in style) {
+            if (style.hasOwnProperty(key)) {
+                this.__defineGetter__(key, () => {
+                    return stylesSheet.get()[key]
+                })
+            }
+        }
+    }
+
 }
 
 let theme = new Theme();
