@@ -34,7 +34,8 @@ class Switch extends Component {
         this.state = {
             height: height,
             width: width,
-            stateOn: stateOn
+            stateOn: stateOn,
+            disabled: this.props.disabled
         };
         if (stateOn) {
             let margin = width - height;
@@ -60,7 +61,7 @@ class Switch extends Component {
                            style={[
                                this.props.style,
                                {
-                                   backgroundColor: "#ccc",
+                                   backgroundColor: !this.state.disabled ? "#ccc" : "#f3f3f3",
                                    borderRadius: this.state.height / 2,
                                    flexDirection: 'row',
                                    alignItems: 'center',
@@ -71,7 +72,7 @@ class Switch extends Component {
                 <Animated.View style={{
                     alignSelf: 'stretch',
                     flex: 1,
-                    backgroundColor: Theme.PrimaryColor,
+                    backgroundColor: !this.state.disabled ? Theme.PrimaryColor : "#f3f3f3",
                     borderRadius: this.state.height / 2,
                     opacity: this.onProgressAnim
                 }}/>
@@ -85,7 +86,7 @@ class Switch extends Component {
                             justifyContent: "center",
                         }}>
                             <Animated.Text numberOfLines={1} style={{
-                                color: "#FFF",
+                                color: !this.state.disabled ? "#FFF" : "#CCC",
                                 fontSize: dotSize * 0.5,
                                 opacity: this.onProgressAnim,
                             }}
@@ -102,7 +103,7 @@ class Switch extends Component {
                             justifyContent: "center",
                         }}>
                             <Animated.Text numberOfLines={1} style={{
-                                color: "#FFF",
+                                color: !this.state.disabled ? "#FFF" : "#CCC",
                                 fontSize: dotSize * 0.5,
                                 opacity: this.onProgressAnimDesc
                             }}>{this.props.closeLabel}</Animated.Text>
@@ -113,7 +114,7 @@ class Switch extends Component {
                     height: dotSize,
                     // width: this.dotWidthAnim,
                     borderRadius: (dotSize) / 2,
-                    backgroundColor: "#FFF",
+                    backgroundColor: !this.state.disabled ? "#FFF" : "#CCC",
                     margin: dotMargin,
                     right: this.rightAnim,
                     left: this.leftAnim
@@ -125,7 +126,8 @@ class Switch extends Component {
     componentWillReceiveProps(props) {
         if (props.stateOn !== this.state.stateOn && 'boolean' === typeof props.stateOn) {
             this.setState({
-                stateOn: !!props.stateOn
+                stateOn: !!props.stateOn,
+                disabled: !!props.disabled
             });
             if (props.stateOn === true) {
                 this.animOn()
@@ -133,6 +135,10 @@ class Switch extends Component {
             if (props.stateOn === false) {
                 this.animOff()
             }
+        } else {
+            this.setState({
+                disabled: !!props.disabled
+            })
         }
     }
 
@@ -258,34 +264,22 @@ class Switch extends Component {
         onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
 
         onPanResponderGrant: (evt, gestureState) => {
-            // console.warn('down')
             this.animPushDown()
-
-            // 开始手势操作。给用户一些视觉反馈，让他们知道发生了什么事情！
-
-            // gestureState.{x,y} 现在会被设置为0
         },
         onPanResponderMove: (evt, gestureState) => {
-            // 最近一次的移动距离为gestureState.move{X,Y}
-
-            // 从成为响应者开始时的累计手势移动距离为gestureState.d{x,y}
         },
         onPanResponderTerminationRequest: (evt, gestureState) => true,
         onPanResponderRelease: (evt, gestureState) => {
-            // 用户放开了所有的触摸点，且此时视图已经成为了响应者。
-            // 一般来说这意味着一个手势操作已经成功完成。
-            // console.warn('up')
-            this.toggle()
-            // this.animPushUp()
+            if (!this.state.disabled) {
+                this.toggle()
+            } else {
+                this.reset()
+            }
         },
         onPanResponderTerminate: (evt, gestureState) => {
-            // 另一个组件已经成为了新的响应者，所以当前手势将被取消。
-            // console.warn('cancel')
             this.reset()
         },
         onShouldBlockNativeResponder: (evt, gestureState) => {
-            // 返回一个布尔值，决定当前组件是否应该阻止原生组件成为JS响应者
-            // 默认返回true。目前暂时只支持android。
             return true;
         },
     });
