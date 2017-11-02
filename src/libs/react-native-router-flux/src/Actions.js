@@ -185,7 +185,6 @@ class Actions {
         this[key] =
             (props = {}) => {
                 assert(this.callback, 'Actions.callback is not defined!');
-                console.log(this.poping)
                 if (this.poping) {
                     this.pushCatch = () => {
                         this.pushCatch = null;

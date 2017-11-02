@@ -41,10 +41,11 @@ import Theme from './Theme'
 //
 //     Theme: ThemeConfigure
 // };
-import {observable} from 'mobx'
+import {observable, action, computed, autorun} from 'mobx'
 import {observer} from 'mobx-react'
+
 export {
-    observable,
+    observable, action, computed, autorun,
     observer,
 
     Actions,

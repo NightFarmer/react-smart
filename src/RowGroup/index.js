@@ -10,8 +10,8 @@ import {
 class RowGroup extends Component {
 
     render() {
-        console.log(this.props.children.length)
-        console.log(typeof this.props.children)
+        // console.log(this.props.children.length)
+        // console.log(typeof this.props.children)
         return (
             <View style={this.props.style}>
                 {

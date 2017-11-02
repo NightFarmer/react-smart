@@ -1,4 +1,4 @@
-import {observable, action} from 'mobx'
+import {observable, action, computed, autorun} from 'mobx'
 
 // import ThemeConfigure from './ThemeConfigure'
 
@@ -62,15 +62,37 @@ class Theme {
     customValues = {};
 
     @action register = (value) => {
-        this.customValues = observable(value)
+        this.customValues = observable(value);
         for (let key in value) {
             if (value.hasOwnProperty(key)) {
-                this.__defineGetter__(key, function () {
+                this.__defineGetter__(key, () => {
                     return this.customValues[key]
                 })
             }
         }
+    };
+
+    createStyle = (styleRender) => {
+        return new StyleHolder(styleRender)
     }
+}
+
+class StyleHolder {
+
+    constructor(getStyle) {
+        let stylesSheet = computed(() => {
+            return getStyle()
+        });
+        let style = getStyle();
+        for (let key in style) {
+            if (style.hasOwnProperty(key)) {
+                this.__defineGetter__(key, () => {
+                    return stylesSheet.get()[key]
+                })
+            }
+        }
+    }
+
 }
 
 let theme = new Theme();
