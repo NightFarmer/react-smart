@@ -7,57 +7,71 @@ import {
 } from 'react-native'
 import {observer} from 'mobx-react'
 
-import TouchableView from '../TouchableView'
 import Theme from '../Theme'
 import uuid from 'uuid'
 
 @observer
 class GridView extends Component {
 
+    maxZIndex = 0;
+
     componentWillReceiveProps(nextProps) {
         this.setState({
+            width: nextProps.width ? nextProps.width : 0,
+            itemHeight: nextProps.itemHeight,
             draggable: nextProps.draggable,
-            dataSource: nextProps.dataSource
+            dataSource: nextProps.dataSource,
+            columnCount: nextProps.columnCount ? nextProps.columnCount : 4,
+            borderWidth: nextProps.borderWidth ? nextProps.borderWidth : 1,
+            borderColor: nextProps.borderColor ? nextProps.borderColor : "#EEE"
         })
-        // console.log(nextProps.dataSource)
     }
 
     constructor(props) {
         super(props);
         this.state = {
-            width: 300,
+            width: this.props.width ? this.props.width : 0,
+            itemHeight: this.props.itemHeight,
             draggable: this.props.draggable,
-            dataSource: this.props.dataSource
+            dataSource: this.props.dataSource,
+            columnCount: this.props.columnCount ? this.props.columnCount : 4,
+            splitWidth: this.props.splitWidth ? this.props.splitWidth : this.props.style ? this.props.style.borderWidth : 0,
+            splitColor: this.props.splitColor ? this.props.splitColor : this.props.style ? this.props.style.borderColor : "#DDD",
+            containerBorderWidth: this.props.style ? this.props.style.borderWidth : 0
         }
     }
 
     render() {
+        // console.warn(this.state.splitWidth, this.state.containerBorderWidth)
         // let children = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         let children = this.state.dataSource
         let itemCount = children.length;
-        let column = 4;
-        let row = Math.ceil(itemCount / column)
+        let columnCount = this.state.columnCount;
+        let rowCount = Math.ceil(itemCount / columnCount)
         let width = this.state.width;
-        let itemWidth = width / column;
-        let itemHeight = itemWidth;
-        let height = itemWidth * row;
-        // console.log(itemCount, row, column)
+        let itemWidth = (width - 2 * this.state.containerBorderWidth - (columnCount - 1) * this.state.splitWidth) / columnCount;
+        let itemHeight = this.state.itemHeight ? this.state.itemHeight : itemWidth;
+        let height = itemHeight * rowCount + 2 * this.state.containerBorderWidth + (rowCount - 1) * this.state.splitWidth;
+        // console.log(itemCount, rowCount, columnCount)
+        // console.log(width, height, itemHeight)
 
-        this.width = width;
         this.height = height;
         this.itemCount = itemCount;
-        this.column = column;
+        this.rowCount = rowCount;
         this.itemWidth = itemWidth;
-        this.itemHeight = itemHeight
+        this.itemHeight = itemHeight;
 
         this.itemInfoList = children.map((item, index) => {
             let itemSortIndex = item.sortIndex === undefined ? index : item.sortIndex;
-            let left = itemSortIndex % column * itemWidth;
-            let top = Math.floor(itemSortIndex / column) * itemHeight;
+            let col = itemSortIndex % columnCount;
+            let left = col * itemWidth + col * this.state.splitWidth;
+            let row = Math.floor(itemSortIndex / columnCount);
+            let top = row * itemHeight + row * this.state.splitWidth;
             return {
                 left: new Animated.Value(left),
                 leftStatic: left,
                 top: new Animated.Value(top),
+                zIndex: new Animated.Value(0),
                 topStatic: top,
                 index: index,//初始index
                 sortIndex: itemSortIndex,
@@ -68,13 +82,16 @@ class GridView extends Component {
         this.itemWidth = itemWidth;
         return (
             <View
-                style={{
+                style={[this.props.style, {
                     width: width,
                     height: height,
-                    backgroundColor: "#EEE",
-                }}
+                }
+                ]}
                 // onLayout={(e) => console.log(e.nativeEvent)}
             >
+                <View style={styles.fillParent}>
+                    {this.renderSplitLine()}
+                </View>
                 <View style={styles.fillParent}>
                     {this.itemInfoList.map(this.renderItem)}
                 </View>
@@ -83,13 +100,48 @@ class GridView extends Component {
         )
     }
 
+    renderSplitLine = () => {
+        let vList = [];
+        let hList = [];
+        for (let i = 0; i < this.state.columnCount - 1; i++) {
+            vList.push(<View
+                key={'vList' + i}
+                style={{
+                    backgroundColor: this.state.splitColor,
+                    width: this.state.splitWidth,
+                    top: 0,
+                    bottom: 0,
+                    left: this.itemWidth + (this.itemWidth + this.state.splitWidth) * i,
+                    position: 'absolute'
+                }}
+            />)
+        }
+
+        for (let i = 0; i < this.rowCount - 1; i++) {
+            hList.push(<View
+                key={'hList' + i}
+                style={{
+                    backgroundColor: this.state.splitColor,
+                    height: this.state.splitWidth,
+                    left: 0,
+                    right: 0,
+                    top: this.itemHeight + (this.itemHeight + this.state.splitWidth) * i,
+                    position: 'absolute'
+                }}
+            />)
+        }
+
+        return [...vList, ...hList]
+    }
+
     renderItem = (item, index) => {
         return <Animated.View
             style={{
                 width: this.itemWidth, height: this.itemHeight,
                 position: 'absolute',
                 left: item.left,
-                top: item.top
+                top: item.top,
+                zIndex: item.zIndex
             }}
             {...this.createItemPanResponder(item).panHandlers}
             key={uuid.v4()}>
@@ -104,7 +156,7 @@ class GridView extends Component {
 
     createItemPanResponder = (item) => PanResponder.create({
         onStartShouldSetPanResponder: (evt, gestureState) => {
-            console.log('down')
+            // console.log('down')
             return this.state.draggable
         },
         onStartShouldSetPanResponderCapture: (evt, gestureState) => {
@@ -118,10 +170,6 @@ class GridView extends Component {
         onMoveShouldSetPanResponder: (evt, gestureState) => {
             console.log('move')
             let longPressDrag = Date.now() - this.pressedTime > 1500;
-            // longPressDrag = longPressDrag && !this.longPressDragCancel;
-            // if (Math.abs(gestureState.dx) > 5 || Math.abs(gestureState.dy) > 5) {
-            //     this.longPressDragCancel = true
-            // }
             return this.state.draggable || this.longPressDrag && this.props.longPressDraggable;
         },
         onMoveShouldSetPanResponderCapture: (evt, gestureState) => {
@@ -137,7 +185,8 @@ class GridView extends Component {
         },
 
         onPanResponderGrant: (evt, gestureState) => {
-            console.log('pushed ')
+            // console.log('pushed ')
+            item.zIndex.setValue(++this.maxZIndex)
         },
         onPanResponderMove: (evt, gestureState) => {
             let dx = gestureState.dx;
@@ -175,11 +224,11 @@ class GridView extends Component {
         },
         onPanResponderTerminationRequest: (evt, gestureState) => {
             console.log('TerminationRequest')
-            //其他组件请求拦截,是否不放权
-            return this.state.draggable
+            //其他组件请求拦截,是否放权
+            return !(this.state.draggable || this.longPressDrag && this.props.longPressDraggable)
         },
         onPanResponderRelease: (evt, gestureState) => {
-            console.log('release')
+            // console.log('release')
             this._runPositionMoveAnim(item, () => {
                 if (this.props.onDragged) {
                     this.props.onDragged(this.itemInfoList.sort((a, b) => a.sortIndex - b.sortIndex).map((item) => item.itemSource))
@@ -197,7 +246,7 @@ class GridView extends Component {
         },
         onShouldBlockNativeResponder: (evt, gestureState) => {
             console.log('block native')
-            return this.state.draggable;
+            return this.state.draggable || this.longPressDrag && this.props.longPressDraggable;
         },
     });
 
@@ -210,8 +259,10 @@ class GridView extends Component {
     };
 
     _runPositionMoveAnim = (item, callback) => {
-        item.leftStatic = item.sortIndex % this.column * this.itemWidth;
-        item.topStatic = Math.floor(item.sortIndex / this.column) * this.itemHeight;
+        let col = item.sortIndex % this.state.columnCount;
+        item.leftStatic = col * this.itemWidth + col * this.state.splitWidth;
+        let row = Math.floor(item.sortIndex / this.state.columnCount);
+        item.topStatic = row * this.itemHeight + row * this.state.splitWidth;
         Animated.parallel([
             Animated.timing(// 可选的基本动画类型: spring, decay, timing
                 item.left,
@@ -234,26 +285,9 @@ class GridView extends Component {
         let rowNum = Math.floor(point.y / this.itemHeight);
         let colNum = Math.floor(point.x / this.itemWidth);
         // console.log(point, rowNum, colNum)
-        return Math.max(0, Math.min(this.itemCount - 1, rowNum * this.column + colNum))
+        return Math.max(0, Math.min(this.itemCount - 1, rowNum * this.state.columnCount + colNum))
     }
 
-    index2Point(index) {
-        let dotSize = this.size / 3;
-        let rowNum = Math.floor(index / 3);
-        let colNum = index % 3;
-        let y = rowNum * dotSize + dotSize / 2;
-        let x = colNum * dotSize + dotSize / 2;
-        return {x, y}
-    }
-
-    isInDot(point) {
-        let index = this.point2Index(point);
-        let centerPoint = this.index2Point(index);
-        return {
-            index,
-            centerPoint
-        }
-    }
 
 }
 
