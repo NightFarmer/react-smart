@@ -79,7 +79,7 @@ class CheckBox extends Component {
         return (
             <TouchableWithoutFeedback onPress={this.handleClick}>
                 <View style={[styles.wrapper]}>
-                    <Image source={imgSrc} style={[styles.icon, style]} tintColor={tintColor}/>
+                    <Image source={imgSrc} style={[styles.icon, style,{tintColor}]} tintColor={tintColor}/>
                     {typeof children === 'string' ? (
                         <Text style={styles.iconRight}>{this.props.children}</Text>) : children}
                 </View>

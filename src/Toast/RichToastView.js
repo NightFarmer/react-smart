@@ -31,7 +31,7 @@ class RichToastView extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={styles.container} pointerEvents='none'>
                 <Animated.View style={[styles.toast, this.buildStyle()]}>
                     <Image source={this.state.icon} style={[styles.icon, {tintColor: '#FFF'}]}/>
                     <Text style={styles.defaultText}>{this.state.message}</Text>

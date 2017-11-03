@@ -59,7 +59,7 @@ class LockPattern extends Component {
     render() {
         let size = this.size;
         return (
-            <View style={[{backgroundColor: "#FFF"}, this.props.style, {width: size, height: size}]}>
+            <View style={[{backgroundColor: "#FFF"}, this.props.style, {width: size, height: size,overflow:'hidden'}]}>
                 <View style={{width: size, height: size, position: 'absolute'}}>
                     {this.renderLine()}
                 </View>

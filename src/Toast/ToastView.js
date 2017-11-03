@@ -29,8 +29,8 @@ class ToastView extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Animated.Text style={[styles.defaultText, this.buildStyle()]}>{this.state.message}</Animated.Text>
+            <View style={styles.container} pointerEvents='none'>
+                <Animated.View style={[styles.textContainer, this.buildStyle()]}><Text style={styles.defaultText}>{this.state.message}</Text></Animated.View>
             </View>
         )
     }
@@ -107,14 +107,17 @@ class ToastView extends Component {
 }
 
 const styles = StyleSheet.create({
-    defaultText: {
+    textContainer:{
         backgroundColor: "#000B",
         borderRadius: 8,
+        padding: 10,
+        maxWidth: width / 2,
+        alignSelf: "flex-end",
+    },
+    defaultText: {
         color: "#FFF",
         fontSize: width * 0.035,
-        alignSelf: "flex-end",
-        padding: 10,
-        maxWidth: width / 2
+        backgroundColor:'#0000'
     },
     container: {
         position: "absolute",

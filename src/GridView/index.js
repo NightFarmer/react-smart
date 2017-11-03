@@ -85,6 +85,7 @@ class GridView extends Component {
                 style={[this.props.style, {
                     width: width,
                     height: height,
+                    overflow:'hidden'
                 }
                 ]}
                 // onLayout={(e) => console.log(e.nativeEvent)}
@@ -298,7 +299,8 @@ const styles = Theme.createStyle(() => {
             left: 0,
             top: 0,
             right: 0,
-            bottom: 0
+            bottom: 0,
+            overflow:'hidden'
         }
     }
 })
