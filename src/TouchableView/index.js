@@ -58,6 +58,10 @@ class TouchableView extends Component {
 
         onPanResponderGrant: (evt, gestureState) => {
             this.canceled = false;
+            if (this.props.disabled) {
+                this.canceled = true;
+                return
+            }
             this.maskOpacity.setValue(1)
             // console.log(evt.nativeEvent)
             this.touchedX = evt.nativeEvent.locationX;
