@@ -95,44 +95,49 @@ class GridView extends Component {
             key={uuid.v4()}>
             {this.props.itemRender(item.itemSource, index)}
         </Animated.View>
-    }
+    };
 
-    parentX = 0;
-    parentY = 0;
 
-    pressTimeout;
-    longPressDrage;
+    pressedTime;
+    longPressDragCancel;
+    longPressDrag;
 
     createItemPanResponder = (item) => PanResponder.create({
         onStartShouldSetPanResponder: (evt, gestureState) => {
-            // console.log('down')
+            console.log('down')
             return this.state.draggable
         },
         onStartShouldSetPanResponderCapture: (evt, gestureState) => {
-            // console.log('down Capture')//拦截后子组件收不到事件
+            console.log('down Capture')//拦截后子组件收不到事件
+            this.pressedTime = Date.now();
+            this.longPressDrag = false;
+            this.longPressDragCancel = false;
             return this.state.draggable
         },
 
         onMoveShouldSetPanResponder: (evt, gestureState) => {
-            // console.log('move')
-            return this.state.draggable;
+            console.log('move')
+            let longPressDrag = Date.now() - this.pressedTime > 1500;
+            // longPressDrag = longPressDrag && !this.longPressDragCancel;
+            // if (Math.abs(gestureState.dx) > 5 || Math.abs(gestureState.dy) > 5) {
+            //     this.longPressDragCancel = true
+            // }
+            return this.state.draggable || this.longPressDrag && this.props.longPressDraggable;
         },
         onMoveShouldSetPanResponderCapture: (evt, gestureState) => {
-            // console.log('move Capture')
-            return this.state.draggable;
+            console.log('move Capture');
+            if (!this.longPressDragCancel) {
+                if (Date.now() - this.pressedTime > 1500) {
+                    this.longPressDrag = true
+                } else if (Math.abs(gestureState.dx) > 5 || Math.abs(gestureState.dy) > 5) {
+                    this.longPressDragCancel = true
+                }
+            }
+            return this.state.draggable || this.longPressDrag && this.props.longPressDraggable;
         },
 
         onPanResponderGrant: (evt, gestureState) => {
-            // console.log(evt.nativeEvent, gestureState)
-            // this.parentX = gestureState.x0 - evt.nativeEvent.locationX
-            // this.parentY = gestureState.y0 - evt.nativeEvent.locationY
-            // let point = {x: evt.nativeEvent.locationX, y: evt.nativeEvent.locationY}
-            // let point = {x: gestureState.x0 - this.parentX, y: gestureState.y0 - this.parentY}
-
-            // let point2Index2 = this.point2Index(point);
-            // console.log('touch mask', point2Index2)
-            // console.log('touch mask')
-
+            console.log('pushed ')
         },
         onPanResponderMove: (evt, gestureState) => {
             let dx = gestureState.dx;
@@ -169,14 +174,12 @@ class GridView extends Component {
 
         },
         onPanResponderTerminationRequest: (evt, gestureState) => {
-            // console.log('TerminationRequest')
-            //其他组件请求拦截,是否放权
-            return !this.state.draggable
+            console.log('TerminationRequest')
+            //其他组件请求拦截,是否不放权
+            return this.state.draggable
         },
         onPanResponderRelease: (evt, gestureState) => {
-            // this.finish()
-            // let dx = gestureState.dx;
-            // let dy = gestureState.dy;
+            console.log('release')
             this._runPositionMoveAnim(item, () => {
                 if (this.props.onDragged) {
                     this.props.onDragged(this.itemInfoList.sort((a, b) => a.sortIndex - b.sortIndex).map((item) => item.itemSource))
@@ -185,16 +188,15 @@ class GridView extends Component {
         },
         onPanResponderTerminate: (evt, gestureState) => {
             //被拦截
-            // console.log('cancel')
+            console.log('cancel')
             this._runPositionMoveAnim(item, () => {
                 if (this.props.onDragged) {
                     this.props.onDragged(this.itemInfoList.sort((a, b) => a.sortIndex - b.sortIndex).map((item) => item.itemSource))
                 }
             })
-            // this.finish()
         },
         onShouldBlockNativeResponder: (evt, gestureState) => {
-            // console.log('block native')
+            console.log('block native')
             return this.state.draggable;
         },
     });
