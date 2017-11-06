@@ -12,7 +12,7 @@ import {
     BackHandler,
     ActivityIndicator,
     DeviceEventEmitter,
-    TouchableOpacity
+    TextInput
 } from 'react-native';
 import {observable, action} from 'mobx'
 import {observer} from 'mobx-react'
@@ -30,40 +30,55 @@ class NumberInput extends Component {
     max = this.props.max
 
     @observable
-    min = this.props.min
+    min = Math.max(0, this.props.min ? this.props.min : 0);
+
+    @observable
+    disabled = this.props.disabled
 
     @observable
     locking = false;
 
+    @observable
+    editable = !this.props.disabled && this.props.editable
+
     componentWillReceiveProps(nextProps) {
-        this.num = nextProps.num !== undefined ? nextProps.num : 0
-        this.max = nextProps.max
-        this.min = nextProps.min
+        this.resetProps(nextProps);
+    }
+
+    @action
+    resetProps(nextProps) {
+        this.num = nextProps.num !== undefined ? nextProps.num : 0;
+        this.max = nextProps.max;
+        this.min = Math.max(0, nextProps.min ? nextProps.min : 0);
+        this.disabled = nextProps.disabled;
+        this.editable = !this.disabled && nextProps.editable;
     }
 
     render() {
-        console.log('num', this.num)
+        // console.log('num', this.num, this.editable);
+        let height = this.props.style ? this.props.style.height ? this.props.style.height : 30 : 30;
+
         return (
-            <View style={[{height: 80, width: 300, backgroundColor: "#f5f7fa"}, this.props.style, {
+            <View style={[{height: height, minWidth: 100, backgroundColor: "#f5f7fa"}, this.props.style, {
                 flexDirection: 'row',
                 alignItems: 'stretch',
-                borderRadius: 10,
+                borderRadius: height / 8,
                 borderColor: "#d8dce5",
                 borderWidth: 1
             }]}>
-                <TouchableView style={{alignItems: 'center', justifyContent: "center", width: 80}}
+                <TouchableView style={{alignItems: 'center', justifyContent: "center", width: height}}
                                onPress={() => {
                                    this.onChange(this.num - 1)
                                }}
-                               disabled={!(this.min === undefined || this.num > this.min) || this.locking}
+                               disabled={!(this.min === undefined || this.num > this.min) || this.locking || this.disabled}
                 >
                     <Text style={{
-                        fontSize: 30,
-                        color: this.min === undefined || this.num > this.min ? "#5a5e66" : "#b4bccc"
+                        fontSize: height * 0.5,
+                        color: (this.min === undefined || this.num > this.min ) && !this.disabled ? "#5a5e66" : "#b4bccc"
                     }}>—</Text>
                 </TouchableView>
                 <View style={{
-                    alignItems: 'center',
+                    alignItems: 'stretch',
                     justifyContent: 'center',
                     flex: 1,
                     borderColor: "#d8dce5",
@@ -71,17 +86,49 @@ class NumberInput extends Component {
                     borderRightWidth: 1,
                     backgroundColor: "#FFF"
                 }}>
-                    <Text style={{fontSize: 30, color: "#5a5e66"}}>{this.num ? this.num : 0}</Text>
+                    <TextInput style={{
+                        fontSize: height * 0.5,
+                        alignItems: 'stretch',
+                        flex: 1,
+                        color: !this.disabled ? "#5a5e66" : "#b4bccc",
+                        padding: 0,
+                        textAlignVertical: "center",
+                        textAlign: "center",
+                    }}
+                               selectionColor={Theme.PrimaryColor}
+                               keyboardType="numeric"
+                               underlineColorAndroid='transparent'
+                               onChangeText={(text) => {
+                                   if (text === undefined || text.length === 0) {
+                                       text = '0'
+                                   }
+                                   let number = parseInt(text);
+                                   if (!isNaN(number)) {
+                                       if (this.max !== undefined) {
+                                           number = Math.min(this.max, number)
+                                       }
+                                       if (this.min !== undefined) {
+                                           number = Math.max(this.min, number)
+                                       }
+                                       // this.num = number
+                                       this.onChange(number)
+                                   } else {
+                                       this.setState({})
+                                   }
+                               }}
+                               editable={!!this.editable}
+                               value={`${this.num ? this.num : 0}`}
+                    />
                 </View>
-                <TouchableView style={{alignItems: 'center', justifyContent: "center", width: 80}}
+                <TouchableView style={{alignItems: 'center', justifyContent: "center", width: height}}
                                onPress={() => {
                                    this.onChange(this.num + 1)
                                }}
-                               disabled={!(this.max === undefined || this.num < this.max) || this.locking}
+                               disabled={!(this.max === undefined || this.num < this.max) || this.locking || this.disabled}
                 >
                     <Text style={{
-                        fontSize: 30,
-                        color: this.max === undefined || this.num < this.max ? "#5a5e66" : "#b4bccc"
+                        fontSize: height * 0.5,
+                        color: (this.max === undefined || this.num < this.max ) && !this.disabled ? "#5a5e66" : "#b4bccc"
                     }}>+</Text>
                 </TouchableView>
             </View>)
@@ -93,7 +140,7 @@ class NumberInput extends Component {
             if (await this.props.onChange(num)) {
                 this.setResult(num)
             } else {
-                this.locking = false;
+                this.setResult(this.num)
             }
         } else {
             this.setResult(num)
