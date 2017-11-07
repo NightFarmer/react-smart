@@ -34,6 +34,7 @@ import Switch from './Switch'
 import LockPattern from './LockPattern'
 import NumberInput from './NumberInput'
 import GridView from './GridView'
+import ActivityIndicator from './ActivityIndicator'
 
 
 import Theme from './Theme'
@@ -79,5 +80,6 @@ export {
     Switch,
     LockPattern,
     NumberInput,
-    GridView
+    GridView,
+    ActivityIndicator,
 };

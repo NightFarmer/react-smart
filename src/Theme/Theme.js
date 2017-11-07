@@ -45,6 +45,9 @@ class Theme {
 
     @observable TouchableViewMaskColor = "#0001";
 
+    @observable ActivityIndicatorColor = "#999999"
+    @observable ActivityIndicatorSize = 30
+
     //===========================================
     @action setTheme = (theme) => {
         for (let key in theme) {
@@ -97,7 +100,7 @@ class StyleHolder {
 
 //修改Text的render方法，达到修改所有Text字体的目的
 import _ from 'lodash'
-import React,{Component} from 'react'
+import React, {Component} from 'react'
 import {Text} from 'react-native'
 // _.wrap是lodash的一个函数,用来包裹传入的函数，然后返回一个新的函数
 Text.prototype.render = _.wrap(Text.prototype.render, function (func, ...args) {

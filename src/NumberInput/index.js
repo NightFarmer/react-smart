@@ -45,7 +45,7 @@ class NumberInput extends Component {
         this.resetProps(nextProps);
     }
 
-    @action
+    // @action
     resetProps(nextProps) {
         this.num = nextProps.num !== undefined ? nextProps.num : 0;
         this.max = nextProps.max;
@@ -147,7 +147,7 @@ class NumberInput extends Component {
         }
     }
 
-    @action
+    // @action
     setResult(num) {
         this.num = num;
         this.locking = false;

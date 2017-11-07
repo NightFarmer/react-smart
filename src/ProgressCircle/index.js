@@ -45,13 +45,13 @@ class ProgressCircle extends Component {
             backgroundColor: this.state.backgroundColor,
             width: this.state.size,
             height: this.state.size,
-        }, this.props.style,{overflow:'hidden'}
+        }, this.props.style, {overflow: 'hidden'}
         ]}>
             <View style={[styles.layer, {
                 backgroundColor: this.state.backgroundColor,
                 width: this.state.size / 2,
                 height: this.state.size,
-                overflow:'hidden'
+                overflow: 'hidden'
             }]}>
                 <Animated.View style={[styles.arcLeft, {
                     backgroundColor: this.state.backgroundColor,
@@ -63,7 +63,7 @@ class ProgressCircle extends Component {
                             outputRange: ['0deg', '360deg'],
                         })
                     }],
-                    overflow:'hidden'
+                    overflow: 'hidden'
                 }]}>
                     <View style={{
                         width: this.state.size / 2,
@@ -71,7 +71,7 @@ class ProgressCircle extends Component {
                         position: 'absolute',
                         backgroundColor: this.state.backgroundColor,
                         right: 0,
-                        overflow:'hidden'
+                        overflow: 'hidden'
                     }}>
                         <View style={[styles.bgd, {
                             borderWidth: this.state.borderWidth,
@@ -87,7 +87,7 @@ class ProgressCircle extends Component {
                         height: this.state.size,
                         position: 'absolute',
                         backgroundColor: this.state.backgroundColor,
-                        overflow:'hidden'
+                        overflow: 'hidden'
                     }}>
                         <View style={[styles.circleProgress, {
                             borderWidth: this.state.borderWidth,
@@ -103,7 +103,7 @@ class ProgressCircle extends Component {
                 backgroundColor: this.state.backgroundColor,
                 width: this.state.size / 2,
                 height: this.state.size,
-                overflow:'hidden'
+                overflow: 'hidden'
             }]}>
                 <Animated.View style={[styles.arcRight, {
                     backgroundColor: this.state.backgroundColor,
@@ -115,13 +115,13 @@ class ProgressCircle extends Component {
                             outputRange: ['-180deg', '180deg'],
                         })
                     }],
-                    overflow:'hidden'
+                    overflow: 'hidden'
                 }]}>
                     <View style={{
                         width: this.state.size / 2,
                         height: this.state.size,
                         position: 'absolute',
-                        overflow:'hidden'
+                        overflow: 'hidden'
                     }}>
                         <View style={[styles.bgd, {
                             borderWidth: this.state.borderWidth,
@@ -136,7 +136,7 @@ class ProgressCircle extends Component {
                         position: 'absolute',
                         right: 0,
                         backgroundColor: this.state.backgroundColor,
-                        overflow:'hidden'
+                        overflow: 'hidden'
                     }}>
                         <View style={[styles.circleProgress, {
                             borderWidth: this.state.borderWidth,
