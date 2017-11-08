@@ -2,31 +2,36 @@
 
 ## 简介
 一套基于ReactNative的快速开发组件库.
+### 使用
+`yarn add react-smart`  
+或  
+`npm install react-smart --save`  
 ## 特性
 - 路由
   - Actions
   - Router
   - Scene
 - 浮动层
-  - Toast
-  - Spin
-  - SpinProgress
-  - Dialog
-  - ActionSheet
+  - Toast 轻提示
+  - Spin 页面加载
+  - SpinProgress 页面进度加载
+  - Dialog 对话框
+  - ActionSheet 弹出选择
   - Popup
 - ui组件
-  - TopBar
-  - ProgressCircle
-  - Button
-  - CheckBox
-  - Switch
-  - NumberInput
-  - TouchableView
-  - LockPattern
+  - TopBar 标题栏
+  - ProgressCircle 圆形加载
+  - GridView 可拖拽网格布局
+  - Button 按钮
+  - CheckBox 复选框
+  - Switch 开关
+  - TouchableView 点击组件
+  - LockPattern 手势解锁
   - RowGroup
-  - ActivityIndicator
-  - NumberInput
-  - Slider
+  - ActivityIndicator 活动指示器
+  - NumberInput 计数组件
+  - Slider 滑块
+  - PopTip 气泡提示
 - 动态主题
   - Theme
 - 其他

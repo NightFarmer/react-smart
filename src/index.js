@@ -36,6 +36,7 @@ import NumberInput from './NumberInput'
 import GridView from './GridView'
 import ActivityIndicator from './ActivityIndicator'
 import Slider from './Slider'
+import PopTip from './PopTip'
 
 
 import Theme from './Theme'
@@ -84,4 +85,5 @@ export {
     GridView,
     ActivityIndicator,
     Slider,
+    PopTip
 };

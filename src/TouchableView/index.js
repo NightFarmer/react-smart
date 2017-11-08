@@ -18,7 +18,7 @@ class TouchableView extends Component {
     render() {
         return (
             <View style={[this.props.style]} {...this.panResponder.panHandlers}
-                  onLayout={this.onLayout}
+                  onLayout={this.onLayout} ref='container'
             >
                 <Animated.View style={[styles.fillParent, {
                     backgroundColor: this.props.maskColor ? this.props.maskColor : Theme.TouchableViewMaskColor,
@@ -34,6 +34,10 @@ class TouchableView extends Component {
             this.props.onPress()
         }
     };
+
+    measureInWindow(callback) {
+        return this.refs.container.measureInWindow(callback)
+    }
 
     width = 0;
     height = 0;
@@ -69,6 +73,7 @@ class TouchableView extends Component {
             this.longPressTimeout = setTimeout(() => {
                 if (this.props.onLongPress) {
                     this.props.onLongPress()
+                    this.canceled = true
                 }
             }, 1500)
         },

@@ -202,25 +202,28 @@ class Slider extends Component {
                 this.leftAnimPop.setValue(maxWidth * this.currentPercent / 100 + this.dotMaxSize / 2 + this.barLeft)
                 // this.leftAnimPop.setValue(point.x + this.barLeft)
                 // this.leftAnimDot.setValue(point.x - this.dotSize / 2)
-                this.popView = PopView.popOver((params) => <Animated.View
-                    style={{
-                        position: 'absolute',
-                        left: this.leftAnimPop,
-                        top: y + Theme.statusBarHeightOffset + (this.touchMaskHeight / 2 - this.dotMaxSize / 2),
-                        // marginLeft: this.leftMarginAnimPop,
-                        // marginTop: this.topMarginAnimPop
-                        marginLeft: -this.popSize * 1.5 / 2,
-                        marginTop: -this.popSize * 1.5
-                    }}
-                    onLayout={(e) => {
-                        console.log(e.nativeEvent.layout)
-                        // this.leftMarginAnimPop.setValue(-e.nativeEvent.layout.width / 2)
-                        // this.topMarginAnimPop.setValue(-e.nativeEvent.layout.height)
-                    }}
-                >
-                    {/*<Text>{params.percent}</Text>*/}
-                    <PopInfoView message={params.percent} size={this.popSize}/>
-                </Animated.View>, {percent: this.currentPercent})
+                this.popView = PopView.popOver({
+                    render: (params) => <Animated.View
+                        style={{
+                            position: 'absolute',
+                            left: this.leftAnimPop,
+                            top: y + Theme.statusBarHeightOffset + (this.touchMaskHeight / 2 - this.dotMaxSize / 2),
+                            // marginLeft: this.leftMarginAnimPop,
+                            // marginTop: this.topMarginAnimPop
+                            marginLeft: -this.popSize * 1.5 / 2,
+                            marginTop: -this.popSize * 1.5
+                        }}
+                        onLayout={(e) => {
+                            console.log(e.nativeEvent.layout)
+                            // this.leftMarginAnimPop.setValue(-e.nativeEvent.layout.width / 2)
+                            // this.topMarginAnimPop.setValue(-e.nativeEvent.layout.height)
+                        }}
+                    >
+                        {/*<Text>{params.percent}</Text>*/}
+                        <PopInfoView message={params.percent} size={this.popSize}/>
+                    </Animated.View>,
+                    params: {percent: this.currentPercent}
+                })
             })
         },
         onPanResponderMove: (evt, gestureState) => {

@@ -3,7 +3,8 @@ import React, {
 } from 'react';
 import {
     View,
-    DeviceEventEmitter
+    DeviceEventEmitter,
+    TouchableWithoutFeedback
 } from 'react-native'
 import uuid from 'uuid'
 import ViewOverlay from '../ViewOverlay'
@@ -31,6 +32,22 @@ class Container extends Component {
                 alignItems: "center"
             }}
         >
+            <TouchableWithoutFeedback
+                onPress={() => {
+                    if (this.props.info.touchDismiss) {
+                        this.props.removeSelf()
+                    }
+                }}
+            >
+                <View style={{
+                    position: "absolute",
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    backgroundColor: this.props.info.maskColor ? this.props.info.maskColor : "#00000000"
+                }}/>
+            </TouchableWithoutFeedback>
             {this.props.viewRender(this.state.params)}
         </View>
     }
@@ -57,11 +74,14 @@ class Container extends Component {
 }
 
 
+//添加浮动层, 底层使用
 class PopView {
 
-    static popOver(viewRender, params) {
+    static popOver(info) {
+        let {render, params} = info;
         let id = uuid.v4();
-        let view = <Container viewRender={viewRender} params={params} key={id} id={id}/>;
+        let view = <Container viewRender={render} params={params} key={id} id={id} info={info}
+                              removeSelf={() => ViewOverlay.removeLayer(id)}/>;
         ViewOverlay.addLayer(view, id);
         return {
             id, view,
