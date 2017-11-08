@@ -10,12 +10,13 @@ import {
     Text,
     Animated,
     BackHandler,
-    ActivityIndicator,
+    // ActivityIndicator,
     DeviceEventEmitter
 } from 'react-native';
 import {observer} from 'mobx-react'
 
 import Theme from '../Theme'
+import ActivityIndicator from '../ActivityIndicator'
 
 const {width, height} = Dimensions.get("window");
 
@@ -36,7 +37,7 @@ class SpinView extends Component {
     render() {
         return (<Animated.View style={[styles.container, this.buildStyle()]}>
             <Animated.View style={[styles.spinCard, this.buildStyle()]}>
-                <ActivityIndicator size="large" color={Theme.PrimaryColor} style={styles.indicator}/>
+                <ActivityIndicator size={width * 0.12} style={styles.indicator}/>
                 <Text style={styles.label}>{this.state.message}</Text>
             </Animated.View>
         </Animated.View>)

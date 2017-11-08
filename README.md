@@ -24,6 +24,9 @@
   - TouchableView
   - LockPattern
   - RowGroup
+  - ActivityIndicator
+  - NumberInput
+  - Slider
 - 动态主题
   - Theme
 - 其他

@@ -35,6 +35,7 @@ import LockPattern from './LockPattern'
 import NumberInput from './NumberInput'
 import GridView from './GridView'
 import ActivityIndicator from './ActivityIndicator'
+import Slider from './Slider'
 
 
 import Theme from './Theme'
@@ -82,4 +83,5 @@ export {
     NumberInput,
     GridView,
     ActivityIndicator,
+    Slider,
 };

@@ -1,3 +1,6 @@
+import {
+    StatusBar
+} from 'react-native'
 import {observable, action, computed, autorun} from 'mobx'
 
 // import ThemeConfigure from './ThemeConfigure'
@@ -47,6 +50,17 @@ class Theme {
 
     @observable ActivityIndicatorColor = "#999999"
     @observable ActivityIndicatorSize = 30
+
+    //============================
+    //用于计算屏幕坐标的偏移量
+    @computed
+    get statusBarHeightOffset() {
+        if (this.StatusBarMode === 1) {
+            return StatusBar.currentHeight
+        } else {
+            return 0
+        }
+    }
 
     //===========================================
     @action setTheme = (theme) => {
