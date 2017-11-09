@@ -19,29 +19,37 @@ class Slider extends Component {
 
     constructor(props) {
         super(props);
-
     }
 
-    @observable size = this.props.size === undefined ? Theme.ActivityIndicatorSize : this.props.size;
-    @observable color = this.props.color === undefined ? Theme.ActivityIndicatorColor : this.props.color
+    @observable color = this.props.color === undefined ? Theme.PrimaryColor : this.props.color
 
     @observable dotSize = this.props.dotSize ? this.props.dotSize : 18;
     @observable dotMaxSize = this.props.dotMaxSize ? this.props.dotMaxSize : 25;
 
     @observable barHeight = this.props.barHeight ? this.props.barHeight : 5;
 
-    @observable step = this.props.step === undefined ? 1 : this.props.step;
+    @observable step = this.props.step ? this.props.step : 1;
 
-    @observable popSize = 50;
+    @observable popSize = this.props.popSize !== undefined ? this.props.popSize : 50;
+
+    @observable
+    currentPercent = this.props.currentPercent ? this.props.currentPercent : 0;
 
     @action
     componentWillReceiveProps(props) {
-        this.size = props.size === undefined ? Theme.ActivityIndicatorSize : props.size
-        this.color = props.color === undefined ? Theme.ActivityIndicatorColor : props.color
+        this.color = props.color === undefined ? Theme.PrimaryColor : props.color
+        this.currentPercent = props.currentPercent ? props.currentPercent : 0;
+        this.dotSize = props.dotSize ? props.dotSize : 18;
+        this.dotMaxSize = props.dotMaxSize ? props.dotMaxSize : 25;
+        this.step = props.step ? props.step : 1;
+        this.popSize = props.popSize !== undefined ? props.popSize : 50;
+        this.barHeight = props.barHeight ? props.barHeight : 5;
     }
 
     render() {
-        let size = this.size;
+        if (this.touchMaskWidth) {
+            this.serDotPosition()
+        }
         return (
             <View style={[{
                 // width: 200,
@@ -75,7 +83,7 @@ class Slider extends Component {
     }
 
     componentDidMount() {
-        if (this.touchMaskWidth) return;
+        if (!this.touchMaskWidth) return;
         this.serDotPosition()
     }
 
@@ -104,7 +112,7 @@ class Slider extends Component {
                 top: 0,
                 bottom: 0,
                 width: this.barSplitX,
-                backgroundColor: Theme.PrimaryColor,
+                backgroundColor: this.color,
             }}/>
         </View>
     }
@@ -115,16 +123,24 @@ class Slider extends Component {
                 width: this.dotSize,
                 height: this.dotSize,
                 borderRadius: this.dotSize / 2,
-                borderWidth: this.dotSize * 0.1,
-                borderColor: Theme.PrimaryColor,
                 position: "absolute",
                 left: this.leftAnimDot,
-                backgroundColor: "#FFF",
                 transform: [{
                     scale: this.dotScale
                 }]
             }}
-        />
+        >
+            {this.props.dotRender ? this.props.dotRender() :
+                <View style={{
+                    width: this.dotSize,
+                    height: this.dotSize,
+                    borderRadius: this.dotSize / 2,
+                    borderWidth: this.dotSize * 0.1,
+                    borderColor: this.color,
+                    backgroundColor: "#FFF",
+                }}/>
+            }
+        </Animated.View>
     };
 
     renderPanMask = () => {
@@ -161,8 +177,6 @@ class Slider extends Component {
 
     touching;
 
-    @observable
-    currentPercent = 50;
 
     panResponder = PanResponder.create({
         onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -202,6 +216,7 @@ class Slider extends Component {
                 this.leftAnimPop.setValue(maxWidth * this.currentPercent / 100 + this.dotMaxSize / 2 + this.barLeft)
                 // this.leftAnimPop.setValue(point.x + this.barLeft)
                 // this.leftAnimDot.setValue(point.x - this.dotSize / 2)
+                if (!this.popSize) return
                 this.popView = PopView.popOver({
                     render: (params) => <Animated.View
                         style={{
@@ -213,11 +228,11 @@ class Slider extends Component {
                             marginLeft: -this.popSize * 1.5 / 2,
                             marginTop: -this.popSize * 1.5
                         }}
-                        onLayout={(e) => {
-                            console.log(e.nativeEvent.layout)
-                            // this.leftMarginAnimPop.setValue(-e.nativeEvent.layout.width / 2)
-                            // this.topMarginAnimPop.setValue(-e.nativeEvent.layout.height)
-                        }}
+                        // onLayout={(e) => {
+                        // console.log(e.nativeEvent.layout)
+                        // this.leftMarginAnimPop.setValue(-e.nativeEvent.layout.width / 2)
+                        // this.topMarginAnimPop.setValue(-e.nativeEvent.layout.height)
+                        // }}
                     >
                         {/*<Text>{params.percent}</Text>*/}
                         <PopInfoView message={params.percent} size={this.popSize}/>
@@ -227,7 +242,7 @@ class Slider extends Component {
             })
         },
         onPanResponderMove: (evt, gestureState) => {
-            if (!this.touching || !this.popView) return;
+            if (!this.touching) return;
             let maxWidth = this.barWidth - this.dotMaxSize;
             let point = {x: gestureState.moveX - this.parentX, y: gestureState.moveY - this.parentY}
             let minX = this.dotMaxSize / 2;
@@ -244,36 +259,43 @@ class Slider extends Component {
             }
             // console.log(percent);
             if (this.currentPercent !== percent) {
-                this.popView.update({percent})
+                this.popView && this.popView.update({percent})
                 this.currentPercent = percent;
                 this.leftAnimPop.setValue(point.x + this.barLeft)
                 this.leftAnimDot.setValue(point.x - this.dotSize / 2)
                 this.barSplitX.setValue(point.x - this.dotMaxSize / 2)
+                this.onPercentChange()
             }
         },
         onPanResponderTerminationRequest: (evt, gestureState) => false,
         onPanResponderRelease: (evt, gestureState) => {
-            // this.finish()
-            this.popView && this.popView.hide()
-            Animated.timing(this.dotScale, {
-                toValue: 1,
-                duration: 200
-            }).start()
-            this.touching = false;
+            this.finishMove()
         },
         onPanResponderTerminate: (evt, gestureState) => {
-            // this.finish()
-            this.popView && this.popView.hide()
-            Animated.timing(this.dotScale, {
-                toValue: 1,
-                duration: 200
-            }).start()
-            this.touching = false;
+            this.finishMove()
         },
         onShouldBlockNativeResponder: (evt, gestureState) => {
             return true;
         },
     });
+
+    finishMove = () => {
+        this.popView && this.popView.hide()
+        Animated.timing(this.dotScale, {
+            toValue: 1,
+            duration: 200
+        }).start()
+        this.touching = false;
+        if (this.props.onFinish) {
+            this.props.onFinish(this.currentPercent)
+        }
+    }
+
+    onPercentChange = () => {
+        if (this.props.onChange) {
+            this.props.onChange(this.currentPercent)
+        }
+    }
 }
 
 export default Slider
