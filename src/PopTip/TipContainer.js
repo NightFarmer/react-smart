@@ -27,7 +27,10 @@ class TipContainer extends Component {
                 arrowRotate = '180deg';
                 arrowPosition = {
                     bottom: 0,
-                    right: Math.max(width - 10 - arrowSize, width / 2 - arrowSize / 2)
+                    right: Math.max(width - 10 - arrowSize, width / 2 - arrowSize / 2),
+                    transform: [{
+                        rotate: arrowRotate
+                    }],
                 };
                 break;
             case Location.Top:
@@ -35,7 +38,10 @@ class TipContainer extends Component {
                 arrowRotate = '180deg';
                 arrowPosition = {
                     bottom: 0,
-                    right: width / 2 - arrowSize / 2
+                    right: width / 2 - arrowSize / 2,
+                    transform: [{
+                        rotate: arrowRotate
+                    }],
                 };
                 break;
             case Location.TopEnd:
@@ -43,31 +49,49 @@ class TipContainer extends Component {
                 arrowRotate = '180deg';
                 arrowPosition = {
                     bottom: 0,
-                    right: Math.min(10, width / 2 - arrowSize / 2)
+                    right: Math.min(10, width / 2 - arrowSize / 2),
+                    transform: [{
+                        rotate: arrowRotate
+                    }],
                 };
                 break;
             case Location.LeftStart:
                 right = arrowSize / 2;
                 arrowRotate = '90deg';
                 arrowPosition = {
-                    right: -arrowSize / 4,
-                    top: 10 + arrowSize / 4
+                    right: 0,
+                    top: 10 + arrowSize / 4,
+                    transform: [{
+                        rotate: arrowRotate
+                    }, {
+                        translateY: -arrowSize / 4
+                    }],
                 };
                 break;
             case Location.Left:
                 right = arrowSize / 2;
                 arrowRotate = '90deg';
                 arrowPosition = {
-                    right: -arrowSize / 4,
-                    top: height / 2 - arrowSize / 2 + arrowSize / 4
+                    right: 0,
+                    top: height / 2 - arrowSize / 2 + arrowSize / 4,
+                    transform: [{
+                        rotate: arrowRotate
+                    }, {
+                        translateY: -arrowSize / 4
+                    }],
                 };
                 break;
             case Location.LeftEnd:
                 right = arrowSize / 2;
                 arrowRotate = '90deg';
                 arrowPosition = {
-                    right: -arrowSize / 4,
-                    top: height - 10 - arrowSize + arrowSize / 4
+                    right: 0,
+                    top: height - 10 - arrowSize + arrowSize / 4,
+                    transform: [{
+                        rotate: arrowRotate
+                    }, {
+                        translateY: -arrowSize / 4
+                    }],
                 };
                 break;
             case Location.RightStart:
@@ -75,7 +99,10 @@ class TipContainer extends Component {
                 arrowRotate = '-90deg';
                 arrowPosition = {
                     left: -arrowSize / 4,
-                    top: 10 + arrowSize / 4
+                    top: 10 + arrowSize / 4,
+                    transform: [{
+                        rotate: arrowRotate
+                    }],
                 };
                 break;
             case Location.Right:
@@ -83,7 +110,10 @@ class TipContainer extends Component {
                 arrowRotate = '-90deg';
                 arrowPosition = {
                     left: -arrowSize / 4,
-                    top: height / 2 - arrowSize / 2 + arrowSize / 4
+                    top: height / 2 - arrowSize / 2 + arrowSize / 4,
+                    transform: [{
+                        rotate: arrowRotate
+                    }],
                 };
                 break;
             case Location.RightEnd:
@@ -91,7 +121,10 @@ class TipContainer extends Component {
                 arrowRotate = '-90deg';
                 arrowPosition = {
                     left: -arrowSize / 4,
-                    top: height - 10 - arrowSize + arrowSize / 4
+                    top: height - 10 - arrowSize + arrowSize / 4,
+                    transform: [{
+                        rotate: arrowRotate
+                    }],
                 };
                 break;
             case Location.BottomStart:
@@ -99,7 +132,10 @@ class TipContainer extends Component {
                 arrowRotate = '0deg';
                 arrowPosition = {
                     top: 0,
-                    left: Math.min(10, width / 2 - arrowSize / 2)
+                    left: Math.min(10, width / 2 - arrowSize / 2),
+                    transform: [{
+                        rotate: arrowRotate
+                    }],
                 };
                 break;
             case Location.Bottom:
@@ -107,7 +143,10 @@ class TipContainer extends Component {
                 arrowRotate = '0deg';
                 arrowPosition = {
                     top: 0,
-                    left: width / 2 - arrowSize / 2
+                    left: width / 2 - arrowSize / 2,
+                    transform: [{
+                        rotate: arrowRotate
+                    }],
                 };
                 break;
             case Location.BottomEnd:
@@ -115,7 +154,10 @@ class TipContainer extends Component {
                 arrowRotate = '0deg';
                 arrowPosition = {
                     top: 0,
-                    left: Math.max(width - 10 - arrowSize, width / 2 - arrowSize / 2)
+                    left: Math.max(width - 10 - arrowSize, width / 2 - arrowSize / 2),
+                    transform: [{
+                        rotate: arrowRotate
+                    }],
                 };
                 break;
         }
@@ -145,7 +187,6 @@ class TipContainer extends Component {
                         // left: 10,
                         // bottom:0,
                         position: 'absolute',
-                        transform: [{rotate: arrowRotate}],
                     }, arrowPosition]}
                 >
                     <View style={{
@@ -156,7 +197,7 @@ class TipContainer extends Component {
                         borderLeftWidth: borderWidth,
                         backgroundColor: "#000B",
                         transform: [{rotate: "45deg"}],
-                        top: arrowSize / 4
+                        top: arrowSize / 4 + 1
                     }}/>
                 </View>
                 <View style={{
