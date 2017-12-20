@@ -19,9 +19,9 @@ const {width, height} = Dimensions.get("window");
 
 import Theme from '../Theme'
 
-class SpinView extends Component {
+class DialogLayerView extends Component {
 
-    static EventType = "smart-span-view";
+    static EventType = "smart-dialog-layer-view";
 
     opacityAnim = new Animated.Value(0);
 
@@ -84,7 +84,7 @@ class SpinView extends Component {
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.onBackPress)
-        DeviceEventEmitter.addListener(SpinView.EventType, event => {
+        DeviceEventEmitter.addListener(DialogLayerView.EventType, event => {
             if (event.event === 'dismiss') {
                 this.dismiss()
             }
@@ -101,7 +101,7 @@ class SpinView extends Component {
 
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.onBackPress)
-        DeviceEventEmitter.removeAllListeners(SpinView.EventType);
+        DeviceEventEmitter.removeAllListeners(DialogLayerView.EventType);
     }
 
     onBackPress = () => {
@@ -189,4 +189,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SpinView
+export default DialogLayerView

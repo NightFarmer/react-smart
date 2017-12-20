@@ -23,7 +23,7 @@ const {width, height} = Dimensions.get("window");
 @observer
 class SpinView extends Component {
 
-    static EventType = "smart-span-view";
+    static EventType = "smart-spin-view";
 
     opacityAnim = new Animated.Value(0);
 

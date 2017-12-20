@@ -20,7 +20,7 @@ const {width, height} = Dimensions.get("window");
 
 class PopupView extends Component {
 
-    static EventType = "smart-span-view";
+    static EventType = "smart-popup-view";
 
     translateY = new Animated.Value(height / 12);
     opacityAnim = new Animated.Value(0);

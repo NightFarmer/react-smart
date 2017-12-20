@@ -20,7 +20,7 @@ const {width, height} = Dimensions.get("window");
 
 class SpinView extends Component {
 
-    static EventType = "smart-span-view";
+    static EventType = "smart-dialog-layer-view";
 
     opacityAnim = new Animated.Value(0);
 

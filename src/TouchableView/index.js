@@ -56,9 +56,9 @@ class TouchableView extends Component {
 
     panResponder = PanResponder.create({
         onStartShouldSetPanResponder: (evt, gestureState) => true,
-        onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+        onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
         onMoveShouldSetPanResponder: (evt, gestureState) => true,
-        onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+        onMoveShouldSetPanResponderCapture: (evt, gestureState) => false,
 
         onPanResponderGrant: (evt, gestureState) => {
             this.canceled = false;
