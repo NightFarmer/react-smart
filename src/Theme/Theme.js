@@ -33,6 +33,8 @@ class Theme {
     @observable  TopBarHeight = 45;
     //StatusBar模式===================================
     @observable StatusBarMode = 1;//1沉浸,2染色
+    //StatusBarStyle状态颜色==============================
+    @observable StatusBarStyle = "default";//'default', 'light-content', 'dark-content'
     //StatusBar背景色=========================
     @observable _StatusBarColor;
     get StatusBarColor() {

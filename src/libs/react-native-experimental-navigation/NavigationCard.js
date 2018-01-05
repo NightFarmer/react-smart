@@ -130,15 +130,26 @@ class NavigationCard extends React.Component<any, Props, any> {
         // const maskPointerEvents = (index === 1 || 'auto' === pointerEvents) ? 'none' : 'auto';
         const maskPointerEvents = "none";
 
-        if (index === 0 && 'box-only' === pointerEvents) {
+        console.log(pointerEvents, index)
+        // if (index === 0 && 'box-only' === pointerEvents) {
+        //     props.Actions.poping = true
+        // }
+        // if (index === 0 && 'auto' === pointerEvents) {
+        //     props.Actions.poping = false;
+        //     if (props.Actions.pushCatch) {
+        //         props.Actions.pushCatch()
+        //     }
+        // }
+        if ('box-only' === pointerEvents && props.Actions.preAction === 'REACT_NATIVE_ROUTER_FLUX_BACK_ACTION') {
             props.Actions.poping = true
         }
-        if (index === 0 && 'auto' === pointerEvents) {
+        if ('auto' === pointerEvents) {
             props.Actions.poping = false;
             if (props.Actions.pushCatch) {
                 props.Actions.pushCatch()
             }
         }
+
         // console.warn(index, pointerEvents, props.scene.navigationState.sceneKey, maskPointerEvents)
         return (
             <Animated.View

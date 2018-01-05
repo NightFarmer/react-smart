@@ -61,14 +61,14 @@ class TopBar extends Component {
 
     setStatusBarStyle = () => {
         if (this.statusBarMode() === 1) {
-            if(Platform.OS==='ios') return;
+            if (Platform.OS === 'ios') return;
             StatusBar.setBackgroundColor('#0000');
             StatusBar.setTranslucent(true)
         } else {
             StatusBar.setBackgroundColor(Theme.StatusBarColor);
             StatusBar.setTranslucent(false)
         }
-        // StatusBar.setBarStyle('dark-content', true);
+        StatusBar.setBarStyle(Theme.StatusBarStyle, true);
         // StatusBar.setBarStyle('light-content', true);
         // StatusBar.setBarStyle('default', true);
     }

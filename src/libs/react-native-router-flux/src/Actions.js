@@ -10,7 +10,7 @@ import {assert} from './Util';
 import Scene from './Scene';
 import * as ActionConst from './ActionConst';
 import {observer} from 'mobx-react'
-import {Platform} from 'react-native'
+// import {Platform} from 'react-native'
 
 export const ActionMap = {
     jump: ActionConst.JUMP,
@@ -186,7 +186,9 @@ class Actions {
         this[key] =
             (props = {}) => {
                 assert(this.callback, 'Actions.callback is not defined!');
-                if (this.poping && Platform.OS === 'android') {
+                console.log(this.poping, this.preAction)
+                // if(this.preAction===ActionConst.BACK_ACTION){
+                if (this.poping) {
                     this.pushCatch = () => {
                         this.pushCatch = null;
                         this.callback({key, type, ...filterParam(props)})
@@ -194,6 +196,9 @@ class Actions {
                 } else {
                     this.callback({key, type, ...filterParam(props)});
                 }
+                // }else{
+                //     this.callback({key, type, ...filterParam(props)});
+                // }
             };
         refs[res.key] = res;
 
