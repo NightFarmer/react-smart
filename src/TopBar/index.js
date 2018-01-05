@@ -60,6 +60,7 @@ class TopBar extends Component {
     }
 
     setStatusBarStyle = () => {
+        StatusBar.setBarStyle(Theme.StatusBarStyle, true);
         if (this.statusBarMode() === 1) {
             if (Platform.OS === 'ios') return;
             StatusBar.setBackgroundColor('#0000');
@@ -68,7 +69,6 @@ class TopBar extends Component {
             StatusBar.setBackgroundColor(Theme.StatusBarColor);
             StatusBar.setTranslucent(false)
         }
-        StatusBar.setBarStyle(Theme.StatusBarStyle, true);
         // StatusBar.setBarStyle('light-content', true);
         // StatusBar.setBarStyle('default', true);
     }
