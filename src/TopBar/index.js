@@ -44,6 +44,19 @@ class TopBar extends Component {
                         </TouchableOpacity>
                 }
                 {
+                    this.props.rightButton ?
+                        <TouchableOpacity style={styles.rightButton}
+                                          onPress={() => {
+                                              this.props.rightButton.onPress && this.props.rightButton.onPress()
+                                          }}
+                        >
+                            <Text style={[styles.rightButtonText, {color: Theme.TopBarElementColor}]}>
+                                {this.props.rightButton.text}
+                            </Text>
+                        </TouchableOpacity>
+                        : null
+                }
+                {
                     this.props.children ? this.props.children :
                         <Text style={[styles.title, {color: Theme.TopBarElementColor}]}>{this.props.title}</Text>
                 }
@@ -128,6 +141,18 @@ const styles = StyleSheet.create({
         width: 20,
         resizeMode: 'contain',
         tintColor: '#FFF',
+    },
+    rightButton: {
+        position: 'absolute',
+        height: 45,
+        justifyContent: 'center',
+        alignItems: 'center',
+        right: 0
+    },
+    rightButtonText: {
+        marginRight: 15,
+        marginLeft: 15,
+        fontSize: 13
     }
 });
 
