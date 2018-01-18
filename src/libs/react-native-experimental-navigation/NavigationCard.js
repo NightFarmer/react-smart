@@ -130,7 +130,7 @@ class NavigationCard extends React.Component<any, Props, any> {
         // const maskPointerEvents = (index === 1 || 'auto' === pointerEvents) ? 'none' : 'auto';
         const maskPointerEvents = "none";
 
-        console.log(pointerEvents, index)
+        // console.log(pointerEvents, index)
         // if (index === 0 && 'box-only' === pointerEvents) {
         //     props.Actions.poping = true
         // }

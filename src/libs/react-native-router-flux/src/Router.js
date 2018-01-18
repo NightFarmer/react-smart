@@ -136,7 +136,7 @@ class Router extends Component {
     Actions.get = key => findElement(navigationState, key, ActionConst.REFRESH);
     Actions.callback = (props) => {
       const constAction = (props.type && ActionMap[props.type] ? ActionMap[props.type] : null);
-        console.log(constAction)
+        // console.log(constAction)
       if(constAction!==ActionConst.FOCUS){
           Actions.preAction = constAction;
       }

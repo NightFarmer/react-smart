@@ -50,9 +50,17 @@ class TopBar extends Component {
                                               this.props.rightButton.onPress && this.props.rightButton.onPress()
                                           }}
                         >
-                            <Text style={[styles.rightButtonText, {color: Theme.TopBarElementColor}]}>
-                                {this.props.rightButton.text}
-                            </Text>
+                            {
+                                !this.props.rightButton.text ? null :
+                                    <Text style={[styles.rightButtonText, {color: Theme.TopBarElementColor}]}>
+                                        {this.props.rightButton.text}
+                                    </Text>
+                            }
+                            {
+                                this.props.rightButton.text || !this.props.rightButton.icon ? null :
+                                    <Image source={this.props.rightButton.icon} style={styles.rightButtonIcon}
+                                           resizeMode='contain'/>
+                            }
                         </TouchableOpacity>
                         : null
                 }
@@ -153,6 +161,12 @@ const styles = StyleSheet.create({
         marginRight: 15,
         marginLeft: 15,
         fontSize: 13
+    },
+    rightButtonIcon: {
+        marginRight: 13,
+        marginLeft: 13,
+        height: 28,
+        width: 28
     }
 });
 
