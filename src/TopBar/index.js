@@ -161,13 +161,13 @@ const styles = StyleSheet.create({
     rightButtonText: {
         marginRight: 15,
         marginLeft: 15,
-        fontSize: 13
+        fontSize: 14
     },
     rightButtonIcon: {
         marginRight: 15,
         marginLeft: 13,
-        height: 20,
-        width: 20
+        height: 22,
+        width: 22
     }
 });
 
