@@ -40,7 +40,8 @@ class TopBar extends Component {
                             }
                         }}>
                             <Image source={require('../../img/back.png')}
-                                   style={[styles.backIconImg, {tintColor: Theme.TopBarElementColor}]}/>
+                                   style={[styles.backIconImg, {tintColor: Theme.TopBarElementColor}]}
+                                   resizeMode='contain'/>
                         </TouchableOpacity>
                 }
                 {
@@ -163,10 +164,10 @@ const styles = StyleSheet.create({
         fontSize: 13
     },
     rightButtonIcon: {
-        marginRight: 13,
+        marginRight: 15,
         marginLeft: 13,
-        height: 28,
-        width: 28
+        height: 20,
+        width: 20
     }
 });
 
