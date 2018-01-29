@@ -17,6 +17,57 @@ import DeviceInfo from '../DeviceInfo'
 @observer
 class TopBar extends Component {
 
+    dp = (value) => (Theme.TopBarHeight || 45) / 45 * value
+
+    topBarStyle = () => {
+        return {
+            height: Theme.TopBarHeight || 45
+        }
+    };
+
+    backIconStyle = () => {
+        return {
+            height: this.dp(45),
+            width: this.dp(45)
+        }
+    };
+
+    backIconImageStyle = () => {
+        return {
+            height: this.dp(20),
+            width: this.dp(20)
+        }
+    }
+
+    titleStyle = () => {
+        return {
+            fontSize: this.dp(20)
+        }
+    }
+
+    rightButtonStyle = () => {
+        return {
+            height: this.dp(45),
+        }
+    }
+
+    rightButtonTextStyle = () => {
+        return {
+            marginRight: this.dp(15),
+            marginLeft: this.dp(15),
+            fontSize: this.dp(14)
+        }
+    }
+
+    rightButtonIconStyle = () => {
+        return {
+            marginRight: this.dp(15),
+            marginLeft: this.dp(13),
+            height: this.dp(22),
+            width: this.dp(22)
+        }
+    }
+
     render() {
         this.setStatusBarStyle()
         return (<View style={{alignSelf: "stretch", alignItems: 'stretch'}}>
@@ -32,7 +83,7 @@ class TopBar extends Component {
             }]}>
                 {
                     this.props.hideBack ? null :
-                        <TouchableOpacity style={styles.backIcon} onPress={() => {
+                        <TouchableOpacity style={[styles.backIcon, this.backIconStyle()]} onPress={() => {
                             if (this.props.onBackPress) {
                                 this.props.onBackPress()
                             } else {
@@ -40,26 +91,28 @@ class TopBar extends Component {
                             }
                         }}>
                             <Image source={require('../../img/back.png')}
-                                   style={[styles.backIconImg, {tintColor: Theme.TopBarElementColor}]}
+                                   style={[styles.backIconImg, {tintColor: Theme.TopBarElementColor}, this.backIconImageStyle()]}
                                    resizeMode='contain'/>
                         </TouchableOpacity>
                 }
                 {
                     this.props.rightButton ?
-                        <TouchableOpacity style={styles.rightButton}
+                        <TouchableOpacity style={[styles.rightButton, this.rightButtonStyle()]}
                                           onPress={() => {
                                               this.props.rightButton.onPress && this.props.rightButton.onPress()
                                           }}
                         >
                             {
                                 !this.props.rightButton.text ? null :
-                                    <Text style={[styles.rightButtonText, {color: Theme.TopBarElementColor}]}>
+                                    <Text
+                                        style={[{color: Theme.TopBarElementColor}, this.rightButtonTextStyle()]}>
                                         {this.props.rightButton.text}
                                     </Text>
                             }
                             {
                                 this.props.rightButton.text || !this.props.rightButton.icon ? null :
-                                    <Image source={this.props.rightButton.icon} style={styles.rightButtonIcon}
+                                    <Image source={this.props.rightButton.icon}
+                                           style={[{tintColor: Theme.TopBarElementColor}, this.rightButtonIconStyle()]}
                                            resizeMode='contain'/>
                             }
                         </TouchableOpacity>
@@ -67,7 +120,8 @@ class TopBar extends Component {
                 }
                 {
                     this.props.children ? this.props.children :
-                        <Text style={[styles.title, {color: Theme.TopBarElementColor}]}>{this.props.title}</Text>
+                        <Text
+                            style={[styles.title, {color: Theme.TopBarElementColor}, this.titleStyle()]}>{this.props.title}</Text>
                 }
             </View>
         </View>)
@@ -128,46 +182,35 @@ class TopBar extends Component {
 const styles = StyleSheet.create({
     topBar: {
         backgroundColor: '#74a8eb',
-        height: 45,
+        // height: 45,
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'stretch'
     },
     title: {
         color: '#FFF',
-        fontSize: 20
+        // fontSize: 20
     },
     backIcon: {
         position: 'absolute',
-        height: 45,
-        width: 45,
+        // height: 45,
+        // width: 45,
         justifyContent: 'center',
         alignItems: 'center',
         left: 0
     },
     backIconImg: {
-        height: 20,
-        width: 20,
+        // height: 20,
+        // width: 20,
         resizeMode: 'contain',
         tintColor: '#FFF',
     },
     rightButton: {
         position: 'absolute',
-        height: 45,
+        // height: 45,
         justifyContent: 'center',
         alignItems: 'center',
         right: 0
-    },
-    rightButtonText: {
-        marginRight: 15,
-        marginLeft: 15,
-        fontSize: 14
-    },
-    rightButtonIcon: {
-        marginRight: 15,
-        marginLeft: 13,
-        height: 22,
-        width: 22
     }
 });
 
