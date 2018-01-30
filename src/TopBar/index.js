@@ -41,7 +41,7 @@ class TopBar extends Component {
 
     titleStyle = () => {
         return {
-            fontSize: this.dp(20)
+            fontSize: Theme.TopBarTitleSize || this.dp(20)
         }
     }
 

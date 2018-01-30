@@ -31,6 +31,8 @@ class Theme {
     @observable  TopBarBorderColor = "#a2a2a2";
     //TopBar高度
     @observable  TopBarHeight = 45;
+    //TopBar标题文字大小
+    @observable  TopBarTitleSize = 20;
     //StatusBar模式===================================
     @observable StatusBarMode = 1;//1沉浸,2染色
     //StatusBarStyle状态颜色==============================
