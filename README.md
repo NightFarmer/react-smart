@@ -1,7 +1,7 @@
 # React-Smart
 
 ## 简介
-一套基于ReactNative的快速开发组件库.
+一套纯JS实现的ReactNative快速开发组件库，无需任何原生工程代码，即可达到Android/iOS双平台一致的UI效果。
 ### 使用
 `yarn add react-smart`  
 或  
