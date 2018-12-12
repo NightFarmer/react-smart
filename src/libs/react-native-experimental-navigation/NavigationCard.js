@@ -115,7 +115,7 @@ class NavigationCard extends React.Component<any, Props, any> {
             pointerEvents,
             renderScene,
             style,
-            ...props, /* NavigationSceneRendererProps */
+            ...props /* NavigationSceneRendererProps */
         } = this.props;
 
         const viewStyle = style === undefined ?

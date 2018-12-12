@@ -121,15 +121,15 @@ import _ from 'lodash'
 import React, {Component} from 'react'
 import {Text} from 'react-native'
 // _.wrap是lodash的一个函数,用来包裹传入的函数，然后返回一个新的函数
-Text.prototype.render = _.wrap(Text.prototype.render, function (func, ...args) {
-    let originText = func.apply(this, args);
-    return React.cloneElement(originText, {
-        style: [
-            {backgroundColor: '#0000'},
-            originText.props.style,
-        ]
-    });
-});
+// Text.prototype.render = _.wrap(Text.prototype.render, function (func, ...args) {
+//     let originText = func.apply(this, args);
+//     return React.cloneElement(originText, {
+//         style: [
+//             {backgroundColor: '#0000'},
+//             originText.props.style,
+//         ]
+//     });
+// });
 
 let theme = new Theme();
 
