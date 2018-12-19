@@ -39,39 +39,39 @@
 
 ## 效果预览
 ### Theme
-![Theme](https://github.com/NightFarmer/react-smart/blob/master/screenshot/theme.gif)
+![Theme](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/theme.gif)
 ### Toast 轻提示
-![Toast](https://github.com/NightFarmer/react-smart/blob/master/screenshot/toast.gif)
+![Toast](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/toast.gif)
 ### Spin/SpinProgress 页面加载
-![SpinProgress](https://github.com/NightFarmer/react-smart/blob/master/screenshot/progress_dialog.gif)
+![SpinProgress](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/progress_dialog.gif)
 ### Dialog 对话框
-![Dialog](https://github.com/NightFarmer/react-smart/blob/master/screenshot/dialog.gif)
+![Dialog](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/dialog.gif)
 ### ActionSheet 弹出选择
-![ActionSheet](https://github.com/NightFarmer/react-smart/blob/master/screenshot/action_sheet.gif)
+![ActionSheet](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/action_sheet.gif)
 ### TopBar 标题栏
-![TopBar](https://github.com/NightFarmer/react-smart/blob/master/screenshot/topbar.gif)
+![TopBar](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/topbar.gif)
 ### ProgressCircle 圆形加载
-![ProgressCircle](https://github.com/NightFarmer/react-smart/blob/master/screenshot/progress_circle.gif)
+![ProgressCircle](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/progress_circle.gif)
 ### GridView 可拖拽网格布局
-![GridView](https://github.com/NightFarmer/react-smart/blob/master/screenshot/grid_view.gif)
+![GridView](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/grid_view.gif)
 ### CheckBox 复选框
-![CheckBox](https://github.com/NightFarmer/react-smart/blob/master/screenshot/checkbox.png)
+![CheckBox](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/checkbox.png)
 ### Switch 开关
-![Switch](https://github.com/NightFarmer/react-smart/blob/master/screenshot/switch.gif)
+![Switch](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/switch.gif)
 ### TouchableView 点击组件
-![TouchableView](https://github.com/NightFarmer/react-smart/blob/master/screenshot/touchableview.gif)
+![TouchableView](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/touchableview.gif)
 ### LockPattern 手势解锁
-![LockPattern](https://github.com/NightFarmer/react-smart/blob/master/screenshot/lock_pattern.gif)
+![LockPattern](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/lock_pattern.gif)
 
 ### ActivityIndicator 活动指示器
-![ActivityIndicator](https://github.com/NightFarmer/react-smart/blob/master/screenshot/ActivityIndicator.gif)
+![ActivityIndicator](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/ActivityIndicator.gif)
 
 ### NumberInput 计数组件
-![NumberInput](https://github.com/NightFarmer/react-smart/blob/master/screenshot/NumberInput.gif)
+![NumberInput](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/NumberInput.gif)
 ### Slider 滑块
-![Slider](https://github.com/NightFarmer/react-smart/blob/master/screenshot/Slider.gif)
+![Slider](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/Slider.gif)
 ### PopTip 气泡提示
-![PopTip](https://github.com/NightFarmer/react-smart/blob/master/screenshot/PopTip.gif)
+![PopTip](https://raw.githubusercontent.com/NightFarmer/react-smart/master/screenshot/PopTip.gif)
 
 #### Android工程调整
 `TopBar`组件在Android中有沉浸(默认)和染色两种状态栏模式,在Android4.4以后版本才能正常使用沉浸样式,若要兼容4.4及更更低版本,请设置TopBar模式为染色模式,或在中`MainActivity`中复写`createReactActivityDelegate`方法
